@@ -93,7 +93,7 @@ const router = new Router({
     ],
 })
 
-/* router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
     if(to.matched.some(r => r.meta.requiresAuth)) { // if route requires authentication
         if(localStorage.getItem('userInfo')) {
             next()
@@ -112,7 +112,7 @@ const router = new Router({
             next()
         }
     }
-}) */
+})
 
 router.afterEach(() => {
     // Remove initial loading

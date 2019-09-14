@@ -15,6 +15,6 @@ export default new AclCreate({
   globalRules: {
     admin: new AclRule('admin').generate(),
     editor: new AclRule('editor').or('admin').generate(),
-    // public: new AclRule('public').or('admin').or('editor').generate(),
+     public: new AclRule('public').or('admin').or('editor').generate(),
   }
 })

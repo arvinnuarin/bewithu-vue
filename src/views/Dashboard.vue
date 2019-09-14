@@ -141,7 +141,7 @@ export default{
         ChangeTimeDurationDropdown
     },
     mounted() {
-        this.$refs.chatLogPS.$el.scrollTop = this.$refs.chatLog.scrollHeight;
+        // this.$refs.chatLogPS.$el.scrollTop = this.$refs.chatLog.scrollHeight;
     }
 }
 </script>

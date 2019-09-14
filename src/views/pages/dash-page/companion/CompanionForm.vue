@@ -9,46 +9,48 @@
     <!-- NAME -->
     <div class="vx-row">
         <div class="vx-col sm:w-1/3 w-full mb-2">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-user" icon-no-border label-placeholder="First Name" v-model="name.first" />
+            <vs-input :danger="errors.has('first_name')" danger-text="Please input first name." val-icon-danger="clear" v-validate="'required|alpha'" name="first_name" class="w-full" icon-pack="feather" icon="icon-user" icon-no-border label-placeholder="First Name" v-model="name.first" />
         </div>
         <div class="vx-col sm:w-1/3 w-full mb-2">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-user" icon-no-border label-placeholder="Middle Name" v-model="name.middle" />
+            <vs-input class="w-full" icon-pack="feather" name="middle_name" icon="icon-user" icon-no-border label-placeholder="Middle Name" v-model="name.middle" />
         </div>
         <div class="vx-col sm:w-1/3 w-full mb-2">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-user" icon-no-border label-placeholder="Last Name" v-model="name.last" />
+            <vs-input :danger="errors.has('last_name')" danger-text="Please input last name." val-icon-danger="clear" v-validate="'required|alpha'" name="last_name" class="w-full" icon-pack="feather" icon="icon-user" icon-no-border label-placeholder="Last Name" v-model="name.last" />
         </div>
     </div>
     <!-- BIRTHDATE & GENDER -->
     <div class="vx-row mt-2">
         <div class="vx-col sm:w-1/2 w-full mb-2">
-            <v-select class="w-full" :options="genderOptions" placeholder="Select Gender" v-model="gender"></v-select>
+            <v-select v-validate="'required'" name="gender" class="w-full" :options="genderOptions" placeholder="Select Gender" v-model="gender"></v-select>
+            <span class="text-danger text-sm"  v-show="errors.has('gender')">Please select gender.</span>
         </div>
         <div class="vx-col sm:w-1/2 w-full mb-2">
-            <datepicker class="w-full" placeholder="Select Birthdate" :disabledDates="disabledDates" :value="initBdate" v-model="birthdate"></datepicker>
+            <datepicker v-validate="'required'" name="birthdate" class="w-full" placeholder="Select Birthdate" :disabledDates="disabledDates" :value="initBdate" v-model="birthdate"></datepicker>
+            <span class="text-danger text-sm"  v-show="errors.has('birthdate')">Please select birthdate.</span>
         </div>
     </div>
     <!-- MOBILE & EMAIL -->
     <div class="vx-row">
         <div class="vx-col sm:w-1/2 w-full mb-2">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-smartphone" icon-no-border label-placeholder="Mobile" v-model="mobile" />
+            <vs-input :danger="errors.has('mobile')" :danger-text="errors.first('mobile')" val-icon-danger="clear" v-validate="'required|numeric|min:11|max:11'" name="mobile" class="w-full" icon-pack="feather" icon="icon-smartphone" icon-no-border label-placeholder="Mobile" v-model="phone" />
         </div>
         <div class="vx-col sm:w-1/2 w-full mb-2">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-at-sign" icon-no-border label-placeholder="Email" v-model="email" />
+            <vs-input :danger="errors.has('email')" :danger-text="errors.first('email')" val-icon-danger="clear" v-validate="'required|email'" class="w-full" name="email" icon-pack="feather" icon="icon-at-sign" icon-no-border label-placeholder="Email" v-model="email" />
         </div>
     </div>
     <!-- FACEBOOK & INSTAGRAM -->
     <div class="vx-row">
         <div class="vx-col sm:w-1/2 w-full mb-2">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-facebook" icon-no-border label-placeholder="Facebook" v-model="social.facebook" />
+            <vs-input class="w-full" name="facebook" icon-pack="feather" icon="icon-facebook" icon-no-border label-placeholder="Facebook" v-model="social.facebook" />
         </div>
         <div class="vx-col sm:w-1/2 w-full mb-2">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-instagram" icon-no-border label-placeholder="Instagram" v-model="social.instagram" />
+            <vs-input class="w-full" name="instagram" icon-pack="feather" icon="icon-instagram" icon-no-border label-placeholder="Instagram" v-model="social.instagram" />
         </div>
     </div>
     <!-- ADDRESS -->
     <div class="vx-row mb-2">
         <div class="vx-col w-full">
-            <vs-input class="w-full" icon-pack="feather" icon="icon-home" icon-no-border label-placeholder="Address" v-model="address" />
+            <vs-input :danger="errors.has('address')" danger-text="Please input companion address." val-icon-danger="clear" v-validate="'required'" name="address" class="w-full" icon-pack="feather" icon="icon-home" icon-no-border label-placeholder="Address" v-model="address" />
         </div>
     </div>
     <!-- Description -->
@@ -60,10 +62,21 @@
                         <span>Description</span>
                     </div>
                 </template>
-                <vs-textarea v-model="desc" />
+                <vs-textarea v-validate="'required'" name="desc" v-model="desc" />
             </vx-input-group>
+            <span class="text-danger text-sm"  v-show="errors.has('desc')">Please input companion description.</span>
         </div>
     </div>
+    <!-- Description -->
+    <div class="vx-row mb-2 mt-4">
+        <div class="vx-col w-full">
+            <h4>Companion Images</h4>
+            <div>
+                <vs-upload multiple automatic limit="3" accept=".jpg" text="Upload Picture" action="https://jsonplaceholder.typicode.com/posts/" @on-success="onSuccessUpload" />
+            </div>
+        </div>
+    </div>
+
     <!-- Submit -->
     <div class="vx-row mt-4 ml-auto">
         <div class="vx-col w-full">
@@ -76,7 +89,9 @@
 <script>
 
 import vSelect from 'vue-select'
-import Datepicker from 'vuejs-datepicker';
+import Datepicker from 'vuejs-datepicker'
+import router from '@/routes/router'
+import ax from '@/axiosInstance'
 
 export default {
     name: 'form-companion',
@@ -93,25 +108,54 @@ export default {
             },
             initBdate: new Date(new Date().getFullYear()-18, new Date().getMonth(), new Date().getDate()),
             name: {
-                fname: '',
+                first: '',
                 middle: '',
                 last: ''
             },
             birthdate: null,
             gender: null,
-            mobile: '',
+            phone: '',
             email: '',
             social: {
                 facebook: '',
                 instagram: '',
             },
             address: '',
-            desc: null
+            desc: null,
+            images: { 
+                image_1: null,
+                image_2: null,
+                image_3: null
+            }
         }
     },
     methods: {
         onSubmit() {
-            alert('submit')
+            this.$validator.validateAll().then( res => {
+                if(res) { // no errrors
+
+                    const payload = {
+                        name: this.name, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
+                        email: this.email, sns: this.social, address: this.address, desc: this.desc,
+                        image: this.images
+                    };
+
+                    ax.post('/companion', payload).then(res => {
+
+                        $notif('success', 'Added Companion', 'A new companion has been added.');
+                        router.replace('/companions/manage');
+
+                    }).catch(() => {
+                        $notif('error', 'Unable to add companion', 'Sorry something went wrong. Please try again later.');
+                    });
+
+                } else {
+                    window.$notif('error', 'Invalid Companion Form.', 'Please check your inputs and try again.');
+                }
+            });
+        },
+        onSuccessUpload() {
+            console.log('success')
         }
     }
 }

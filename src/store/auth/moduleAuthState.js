@@ -6,13 +6,12 @@
 ==========================================================================================*/
 
 
-import auth from "@/auth/authService";
-
 export default {
     isUserLoggedIn: () => {
         let isAuthenticated = false;
-
-        isAuthenticated ? auth.isAuthenticated = true : false;
+        isAuthenticated ? true : false;
+        
         return (localStorage.getItem('userInfo') && isAuthenticated);
     },
+    user: null
 }

@@ -1,6 +1,6 @@
 const config = {
-    AXIOS_BASE_URL: 'http://ncwpms.test/api/',
-    PUSHER_KEY: '00bb8e8c88d93c579ab5',
+    AXIOS_BASE_URL: 'https://cors-anywhere.herokuapp.com/http://localhost:8000/api/',
+    PUSHER_KEY: 'c497ae95e67532a85467',
     PUSHER_CLUSTER: 'ap1'
 }
 

@@ -16,16 +16,6 @@ import 'material-icons/iconfont/material-icons.css' //Material Icons
 import 'vuesax/dist/vuesax.css'; // Vuesax
 Vue.use(Vuesax)
 
-
-// Axios
-import axios from 'axios'
-const ax = axios.create({
-  baseURL: config.AXIOS_BASE_URL,
-  timeout: 10000,
-  headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}
-});
-Vue.prototype.$http = ax
-
 // Theme Configurations
 import '../themeConfig.js'
 
@@ -52,11 +42,6 @@ import router from './routes/router'
 
 // Vuex Store
 import store from './store/store'
-
-
-// i18n
-import i18n from './i18n/i18n'
-
 
 // Vuesax Admin Filters
 import './filters/filters'
@@ -128,12 +113,16 @@ const echoInstance = new Echo({
 
 window.Echo = echoInstance;
 
+// toast notification
+import notification from './plugins/notification'
+window.$notif = notification;
+
+
 Vue.config.productionTip = false
 
-new Vue({
+window.$v = new Vue({
     router,
     store,
-    i18n,
     acl,
     render: h => h(App)
 }).$mount('#app')

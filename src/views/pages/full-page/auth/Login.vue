@@ -31,7 +31,7 @@
 
                                 <vs-input
                                     data-vv-validate-on="blur"
-                                    v-validate="'required|min:6|max:10'"
+                                    v-validate="'required|min:6|max:15'"
                                     type="password"
                                     name="password"
                                     icon="icon icon-lock"
@@ -60,8 +60,8 @@
 export default {
     data() {
         return {
-            email: 'arvinnuarin@gmail.com',
-            password: 'secret2019',
+            email: 'micaellaoronce@gmail.com',
+            password: 'password',
             checkbox_remember_me: false
         }
     },
@@ -73,7 +73,7 @@ export default {
     methods: {
         login() {
             const payload = {
-                remember_me: this.checkbox_remember_me,
+                remember: this.checkbox_remember_me,
                 email: this.email,
                 password: this.password
             }
