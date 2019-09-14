@@ -39,7 +39,7 @@ export default [
     icon: "CalendarIcon",
   },
   {
-    header: "General",
+    header: "Companion",
   },
   {
     url: null,
@@ -60,22 +60,10 @@ export default [
     ]
   },
   {
-    url: null,
-    name: "Locations",
-    slug: "locations",
-    icon: "LayoutIcon",
-    submenu: [
-      {
-        url: '/appointment/locations/add',
-        name: "New Location",
-        slug: "location-new",
-      },
-      {
-        url: '/appointment/locations/manage',
-        name: "Manage Locations",
-        slug: "location-manage",
-      },
-    ]
+    url: '/companions/rates',
+    name: "Manage Rates",
+    slug: "rates",
+    icon: "LayoutIcon"
   },
   {
     header: "Appointments",
@@ -154,13 +142,13 @@ export default [
   },
   {
     url: '/settings/user/profile',
-    name: "UserProfile",
+    name: "User Profile",
     slug: "user-profile",
     icon: "LayoutIcon",
   },
   {
     url: '/settings/manage-users',
-    name: "ManageUsers",
+    name: "Manage Users",
     slug: "manage-users",
     icon: "LayoutIcon",
   },

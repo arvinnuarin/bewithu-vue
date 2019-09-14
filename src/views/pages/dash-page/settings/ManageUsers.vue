@@ -11,11 +11,12 @@
             @cancel="resetForm"
             @accept="onAddAdmin"
             :active.sync="showAddAdmin"
-            title="Add Admin User">
+            title="Add Admin User"
+            accept-text="Submit">
             <div class="con-exemple-prompt">
-                <vs-input class="w-full" placeholder="Full Name" v-model="name" />
-                <vs-input class="w-full mt-5" placeholder="Cellphone Number" v-model="contact" />
-                <vs-input class="w-full mt-5" placeholder="Email Address" v-model="email" />
+                <vs-input :danger="errors.has('fullname')" danger-text="Please input full name." name="fullname" val-icon-danger="clear" v-validate="'required'" class="w-full" placeholder="Full Name" v-model="name" />
+                <vs-input :danger="errors.has('phone')" :danger-text="errors.first('phone')" name="phone" val-icon-danger="clear" v-validate="'required|numeric|min:11|max:11'" class="w-full mt-5" placeholder="Cellphone Number" v-model="phone" />
+                <vs-input :danger="errors.has('email')" :danger-text="errors.first('email')" name="email" val-icon-danger="clear" v-validate="'required|email'" class="w-full mt-5" placeholder="Email Address" v-model="email" />
             </div>
         </vs-prompt>
         <!-- New Admin User Button -->
@@ -30,17 +31,18 @@
                 <vs-th>Contact Number</vs-th>
                 <vs-th>Email Address</vs-th>
                 <vs-th>Added At</vs-th>
-                <vs-th>Status</vs-th>
+                <vs-th>Action</vs-th>
             </template>
 
              <template slot-scope="{data}">
                 <vs-tr :key="indextr" v-for="(tr, indextr) in data">
 
                     <vs-td :data="data[indextr].name"> {{ data[indextr].name}} </vs-td>
-                    <vs-td :data="data[indextr].contact"> {{ data[indextr].contact}} </vs-td>
+                    <vs-td :data="data[indextr].phone"> {{ data[indextr].phone}} </vs-td>
                     <vs-td :data="data[indextr].email"> {{ data[indextr].email}} </vs-td>
-                    <vs-td :data="data[indextr].added"> {{ data[indextr].added}} </vs-td>
-                    <vs-td :data="data[indextr].status"> {{ data[indextr].status}} </vs-td>
+                    <vs-td :data="data[indextr].created_at"> {{ data[indextr].created_at}} </vs-td>
+                    <vs-td :data="data[indextr].id"> <vs-button color="danger" type="gradient" 
+                    @click="openConfirmDelete(data[indextr].id)">Delete</vs-button></vs-td>
                 </vs-tr>
             </template>
         </vs-table>
@@ -49,27 +51,74 @@
 
 <script>
 
+import ax from '@/axiosInstance'
+
 export default {
     name: 'manage-users',
+    mounted() {
+        this.getAdminUsers() // get admin users
+    },
     data() {
         return {
             admins: [],
             showAddAdmin: false,
             name: '',
-            contact: '',
-            email: ''
+            phone: '',
+            email: '',
+            activeConfirm: false,
+            selectedAdminId: null
         }
     },
     methods: {
 
+        async getAdminUsers() {
+            await ax.get('/auth/users').then(res => {
+                this.admins = res.data; //set admins
+            }).catch(() => window.$notif('error', 'Admin Users Failed', 'Unable to retrieve admin users'));
+        },
         resetForm() {
             this.name = '';
-            this.contact = '';
+            this.phone = '';
             this.email = '';
         },
+        persistDialog() {
+            this.showAddAdmin = true
+        },
         onAddAdmin() {
-            this.admins.push({name: this.name, contact: this.contact, email: this.email, added: '2019-09-10', status: 'PENDING'})
-            this.resetForm();
+
+            this.persistDialog(); // don't close dialog
+            this.$validator.validateAll().then( res => { // validate form
+
+                if(res) { // no errors 
+                    this.showAddAdmin = false; // close the dialog
+                    ax.post('/auth/register', {name: this.name, phone: this.phone, email: this.email})
+                    .then(res => {
+                        window.$notif('success', 'Added An Admin User', 'A new admin user has been created.');
+                        this.getAdminUsers();
+                        this.resetForm();
+                    }).catch(() => window.$notif('error', 'Adding Admin User Failed', 'Unable to add an admin user. Please try again later.'));
+                } else {
+                    window.$notif('error', 'Invalid Input', 'Please check your inputs and try again.');
+                }
+            });
+        },
+        openConfirmDelete(adminId) { // open delete confirmation dialog
+            
+            this.selectedAdminId = adminId; // get the selected adminID
+
+            this.$vs.dialog({
+                type: 'confirm',
+                color: 'danger',
+                title: `Confirm`,
+                text: 'Do you want to delete this admin user account?',
+                accept: this.onDeleteAdmin
+            })
+        },
+        async onDeleteAdmin() { // delete an admin
+           await ax.delete(`/auth/${this.selectedAdminId}`).then( res => {
+                this.getAdminUsers(); // get all current admin users
+                window.$notif('success', 'Admin Deletion', 'Admin User has been successfully deleted.');
+            }).catch(() => window.$notif('error', 'Deleting Admin Failed ', 'Unable to delete an admin user. Please try again later.'));
         }
     }
 }
