@@ -19,7 +19,7 @@ import Router from 'vue-router'
 
 // AUTHENTICATED DASHBOARD ROUTES
 import miniApps from './auth/mini-app.routes'
-import generalRoutes from './auth/general.routes'
+import companionRoutes from './auth/companion.routes'
 import apppointmentRoutes from './auth/appointment.routes'
 import customerRoutes from './auth/customer.routes'
 import accountingRoutes from './auth/accounting.routes'
@@ -67,7 +67,7 @@ const router = new Router({
         // =============================================================================
         // Dashboard Routes (Authenticated)
         // =============================================================================
-               ...miniApps, ...generalRoutes, ...apppointmentRoutes, ...customerRoutes, ...accountingRoutes, 
+               ...miniApps, ...companionRoutes, ...apppointmentRoutes, ...customerRoutes, ...accountingRoutes, 
                ...settingsRoutes
             ],
         },

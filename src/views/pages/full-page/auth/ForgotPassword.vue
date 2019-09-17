@@ -1,13 +1,9 @@
 <!-- =========================================================================================
     File Name: ForgotPassword.vue
-    Description: FOrgot Password Page
+    Description: Forgot Password Page
     ----------------------------------------------------------------------------------------
-    Item Name: Vuesax Admin - VueJS Dashboard Admin Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
+    Author: John Arvin Nuarin
 ========================================================================================== -->
-
-
 <template>
     <div class="h-screen flex w-full bg-img">
         <div class="vx-col w-4/5 sm:w-4/5 md:w-3/5 lg:w-3/4 xl:w-3/5 mx-auto self-center">
@@ -21,12 +17,12 @@
                             <div class="p-8">
                                 <div class="vx-card__title mb-8">
                                     <h4 class="mb-4">Recover your password</h4>
-                                    <p>Please enter your email address and we'll send you instructions on how to reset your password.</p>
+                                    <p>Please enter your registered email address and we'll send you instructions on how to reset your password.</p>
                                 </div>
 
-                                <vs-input type="email" label-placeholder="Email" v-model="value1" class="w-full mb-8" />
+                                <vs-input :danger="errors.has('email')" :danger-text="errors.first('email')" name="email" val-icon-danger="clear" v-validate="'required|email'" type="email" label-placeholder="Email" v-model="email" class="w-full mb-8"/>
                                 <vs-button type="border" to="/auth/login" class="px-4 w-full md:w-auto">Back To Login</vs-button>
-                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0">Recover Password</vs-button>
+                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0" @click="onRecoverPassword">Recover Password</vs-button>
                             </div>
                         </div>
                     </div>
@@ -37,10 +33,35 @@
 </template>
 
 <script>
+
+import ax from '@/axiosInstance'
+import router from '@/routes/router'
+
 export default {
+    name: 'forgot-password',
     data() {
         return {
-            value1: ''
+            email: ''
+        }
+    },
+    methods: {
+        onRecoverPassword() {
+
+             this.$validator.validateAll().then( res => {
+
+                 if(res) {
+                     ax.post('/auth/recover', {email: this.email}).then( () => {
+                        window.$notif('success', 'Recovery Email Sent', 'We have sent you a reset password email. Please check your mailbox');
+                        router.replace('/auth/login');
+                    }).catch(() => window.$notif('error', 'Invalid User', 'This email address is not registered to the system.'));
+                 } else {
+                      window.$notif('error', 'Invalid Email Address', 'Valid Email is required please try again.');
+                 }
+             });
+
+
+
+            
         }
     }
 }

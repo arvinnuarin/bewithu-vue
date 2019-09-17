@@ -14,6 +14,8 @@
   Author: John Arvin Nuarin
 ==========================================================================================*/
 
+import ax from '@/axiosInstance'
+
 const authRoutes = [
     {
         path: '/callback',
@@ -42,12 +44,18 @@ const authRoutes = [
         }
     },
     {
-        path: '/auth/reset-password',
+        path: '/auth/reset-password/:token',
         name: 'authResetPassword',
         component: () => import('@/views/pages/full-page/auth/ResetPassword.vue'),
         meta: {
             rule: 'public',
             authRoute: 'true'
+        },
+        beforeEnter: (to, from, next) => {
+
+            ax.get(`/auth/find/${to.params.token}`).then(res => {
+                next( vm => vm.setResetData(res.data));
+            }).catch(() => next({ name: 'pageError404' }));
         }
     },
     {

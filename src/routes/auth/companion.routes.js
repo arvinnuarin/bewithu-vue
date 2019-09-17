@@ -1,6 +1,6 @@
 /*=========================================================================================
-  File Name: general.routes.js
-  Description: Routes for General Companions and Location
+  File Name: companion.routes.js
+  Description: Routes for General Companions and Rates
   Object Strucutre:
                     path => router path
                     name => router name
@@ -41,27 +41,14 @@ const generalRoutes = [
         },
     },
     {
-        path: '/appointment/locations/add',
-        name: 'location-add',
-        component: () => import('@/views/pages/dash-page/location/AddLocation.vue'),
+        path: '/companions/service-rates',
+        name: 'service-rates',
+        component: () => import('@/views/pages/dash-page/service/ManageServices.vue'),
         meta: {
             breadcrumb: [
                 { title: 'Dashboard', url: '/dashboard' },
-                { title: 'Appointment Locations', url: '/appointment/locations/manage'},
-                { title: 'New Location', active: true}],
-            pageTitle: 'New Location',
-            rule: 'editor'
-        },
-    },
-    {
-        path: '/appointment/locations/manage',
-        name: 'location-manage',
-        component: () => import('@/views/pages/dash-page/location/ManageLocation.vue'),
-        meta: {
-            breadcrumb: [
-                { title: 'Dashboard', url: '/dashboard' },
-                { title: 'Appointment Locations', active: true}],
-            pageTitle: 'Appointment Locations List',
+                { title: 'Service Rates', active: true}],
+            pageTitle: 'Service Rates',
             rule: 'editor'
         },
     }

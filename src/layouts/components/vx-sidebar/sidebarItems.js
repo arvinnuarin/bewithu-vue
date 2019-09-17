@@ -60,7 +60,7 @@ export default [
     ]
   },
   {
-    url: '/companions/rates',
+    url: '/companions/service-rates',
     name: "Manage Rates",
     slug: "rates",
     icon: "LayoutIcon"
