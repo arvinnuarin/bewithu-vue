@@ -96,9 +96,9 @@ export default [
     icon: "LayoutIcon",
   },
   {
-    url: '/customers/banned',
-    name: "Banned Customers",
-    slug: "customer-banned",
+    url: '/customers/inactive',
+    name: "Inactive Customers",
+    slug: "customer-inactive",
     icon: "LayoutIcon",
   },
   {

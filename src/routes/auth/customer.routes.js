@@ -31,7 +31,7 @@ const customerRoutes = [
         beforeEnter: (to, from, next) => {
             function apptStat (param) {
                const status = [{ type: 'active', name: 'Active' }, 
-               { type: 'banned', name: 'Banned' }]
+               { type: 'inactive', name: 'Inactive' }]
       
                return _.find(status, {type: param});
             }
@@ -43,7 +43,7 @@ const customerRoutes = [
 
             to.meta.pageTitle = `${data.name} Customers`;
             to.meta.breadcrumb[1] = { title: `${data.name} Customers`, active: true };
-            
+
             next();
         }
     },

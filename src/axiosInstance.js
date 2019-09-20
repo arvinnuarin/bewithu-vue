@@ -16,7 +16,7 @@ try {
 }
 
 const ax = axios.create({
-    baseURL: 'http://localhost:8000/api/',
+    baseURL: 'http://localhost:8000/api/admin/',
     timeout: 10000,
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 
     'X-Requested-With': 'XMLHttpRequest', 'Authorization': token}
