@@ -88,7 +88,6 @@ Object.defineProperty(Vue.prototype, '$_', { value: _ })
 import VueMoment from 'vue-moment'
 Vue.use(VueMoment);
 
-
 // Vue Currency Filter
 import VueCurrencyFilter from 'vue-currency-filter'
 Vue.use(VueCurrencyFilter, {

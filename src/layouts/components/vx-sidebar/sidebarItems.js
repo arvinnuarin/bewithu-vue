@@ -121,19 +121,9 @@ export default [
         slug: "sales",
       },
       {
-        url: '/accounting/income',
-        name: "Income",
-        slug: "income",
-      },
-      {
         url: '/accounting/expenses',
         name: "Expenses",
         slug: "expenses",
-      },
-      {
-        url: '/accounting/debit-credit',
-        name: "Debit Credit",
-        slug: "debit-credit",
       },
     ]
   },

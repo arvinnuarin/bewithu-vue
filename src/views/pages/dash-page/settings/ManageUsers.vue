@@ -72,9 +72,14 @@ export default {
     methods: {
 
         async getAdminUsers() {
+            
+            this.$vs.loading();
+            
             await ax.get('/auth/users').then(res => {
                 this.admins = res.data; //set admins
             }).catch(() => window.$notif('error', 'Admin Users Failed', 'Unable to retrieve admin users'));
+
+            this.$vs.loading.close();
         },
         resetForm() {
             this.name = '';

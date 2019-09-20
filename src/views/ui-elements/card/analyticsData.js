@@ -193,12 +193,8 @@ export default {
     revenueComparisonLine: {
         series: [{
                 name: "This Month",
-                data: [45000, 47000, 44800, 47500, 45500, 48000, 46500, 48600]
+                data: [45000, 47000, 44800, 47500, 45500, 48000, 46500, 48600,45500, 48000, 46500, 48600]
             },
-            {
-                name: "Last Month",
-                data: [46000, 48000, 45500, 46600, 44500, 46500, 45000, 47000]
-            }
         ],
         chartOptions: {
             chart: {
@@ -244,7 +240,7 @@ export default {
                 axisTicks: {
                     show: false,
                 },
-                categories: ['01', '05', '09', '13', '17', '21', '26', '31'],
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 axisBorder: {
                     show: false,
                 },
@@ -269,7 +265,7 @@ export default {
     // LINE AREA CHART
     subscribersGained: {
         series: [{
-            name: 'Subscribers',
+            name: 'Active Users',
             data: [28, 40, 36, 52, 38, 60, 55]
         }],
         chartOptions: {
@@ -385,7 +381,7 @@ export default {
     },
     revenueGenerated: {
         series: [{
-            name: 'Revenue',
+            name: 'Monthly Sales',
             data: [350, 275, 400, 300, 350, 300, 450]
         }],
         chartOptions: {
@@ -539,7 +535,7 @@ export default {
     },
     // RADIAL BAR
     goalOverviewRadialBar: {
-        series: [83],
+        series: [30],
         chartOptions: {
             plotOptions: {
                 radialBar: {

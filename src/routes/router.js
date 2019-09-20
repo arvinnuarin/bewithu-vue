@@ -57,7 +57,7 @@ const router = new Router({
                 {
                     path: '/dashboard',
                     name: 'dashboard',
-                    component: () => import('@/views/Dashboard.vue'),
+                    component: () => import('@/views/pages/full-page/dashboard/Dashboard.vue'),
                     meta: {
                         rule: 'editor'
                     }

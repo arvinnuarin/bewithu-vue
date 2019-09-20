@@ -91,8 +91,12 @@ export default {
 
         async initServices() {  // return all services
            
+           this.$vs.loading();
+
             await ax.get('/service').then(res => this.services = res.data)
             .catch(() => window.$notif('error', 'Services Fetch Failed', 'Unable to retrieve services.'));
+
+            this.$vs.loading.close();
         },
         resetForm() {
             this.name = '',

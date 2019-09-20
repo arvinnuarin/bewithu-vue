@@ -27,6 +27,18 @@ const accountingRoutes = [
             rule: 'editor'
         }
     },
+    {
+      path: '/accounting/expenses',
+      name: 'accounting-expenses',
+      component: () => import('@/views/pages/dash-page/accounting/ManageExpenses.vue'),
+      meta: {
+          breadcrumb: [
+              { title: 'Dashboard', url: '/dashboard' },
+              { title: 'Expenses List', active: true }],
+          pageTitle: 'Daily Expenses List',
+          rule: 'editor'
+      }
+  },
 ];
 
 export default accountingRoutes;
