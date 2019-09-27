@@ -16,8 +16,7 @@
             <div class="con-exemple-prompt">
                 <vs-input :danger="errors.has('name')" danger-text="Please input service name." name="name" val-icon-danger="clear" v-validate="'required'" class="w-full" placeholder="Service Name" v-model="name" />
                 <vs-input :danger="errors.has('desc')" :danger-text="errors.first('desc')" name="desc" val-icon-danger="clear" v-validate="'required|max:50'" class="w-full mt-5" placeholder="Description" v-model="desc" />
-                <vs-input :danger="errors.has('hourly_rate')" :danger-text="errors.first('hourly_rate')" name="hourly_rate" val-icon-danger="clear" v-validate="'required|decimal|max:10'" class="w-full mt-5" placeholder="Normal Rates (3 Hours)" v-model="hourly_rate" />
-                <vs-input :danger="errors.has('exceed_rate')" :danger-text="errors.first('exceed_rate')" name="exceed_rate" val-icon-danger="clear" v-validate="'required|decimal|max:10'" class="w-full mt-5" placeholder="Exceeding Rate per hour" v-model="exceed_rate" />
+                <vs-input :danger="errors.has('hourly_rate')" :danger-text="errors.first('hourly_rate')" name="hourly_rate" val-icon-danger="clear" v-validate="'required|decimal|max:10'" class="w-full mt-5" placeholder="Hourly Rate" v-model="hourly_rate" />
             </div>
         </vs-prompt>
         <!-- Update Services -->
@@ -43,8 +42,7 @@
             <template slot="thead">
                 <vs-th>Name</vs-th>
                 <vs-th>Description</vs-th>
-                <vs-th>Normal Rate (3hrs)</vs-th>
-                <vs-th>Exceed Rate</vs-th>
+                <vs-th>Hourly Rate</vs-th>
                 <vs-th>Actions</vs-th>
             </template>
              <template slot-scope="{data}">
@@ -53,7 +51,6 @@
                     <vs-td :data="data[indextr].name"> {{ data[indextr].name}} </vs-td>
                     <vs-td :data="data[indextr].desc"> {{ data[indextr].desc}} </vs-td>
                     <vs-td :data="data[indextr].hourly_rate" class="bold"> {{ data[indextr].hourly_rate | currency }}</vs-td>
-                    <vs-td :data="data[indextr].exceed_rate"> {{ data[indextr].exceed_rate | currency }}</vs-td>
                     <vs-td :data="data[indextr].id">
                         <div class="centerx flex">
                             <vs-button color="warning" class="mr-2" type="gradient" icon="edit" @click="onUpdateService(data[indextr].id, data[indextr].name, data[indextr].hourly_rate, data[indextr].exceed_rate)"></vs-button>
@@ -83,7 +80,6 @@ export default {
             name: '',
             desc: '',
             hourly_rate: null,
-            exceed_rate: null,
             selectedServiceId: null
         }
     },
@@ -101,8 +97,7 @@ export default {
         resetForm() {
             this.name = '',
             this.desc = '',
-            this.hourly_rate = null,
-            this.exceed_rate = null;
+            this.hourly_rate = null
         },
         persistDialog() {
             this.showAddService = true;
@@ -125,7 +120,7 @@ export default {
 
             this.$vs.loading();
 
-            await ax.post('/service', {name: this.name, desc: this.desc, hourly_rate: this.hourly_rate, exceed_rate: this.exceed_rate})
+            await ax.post('/service', {name: this.name, desc: this.desc, hourly_rate: this.hourly_rate})
             .then( () => {
 
                 this.showAddService = false;
@@ -138,12 +133,11 @@ export default {
         persistUpdateDialog() {
             this.showUpdateService = true;
         },
-        onUpdateService(srvId, name, hourly, exceed) {
+        onUpdateService(srvId, name, hourly) {
 
             this.selectedServiceId = srvId, // set the selected service Id
             this.name = name,
             this.hourly_rate = hourly,
-            this.exceed_rate = exceed;
             this.persistUpdateDialog();
         },
         validateUpdateForm() {
@@ -160,7 +154,7 @@ export default {
 
             this.$vs.loading();
 
-            await ax.patch(`/service/${this.selectedServiceId}`, {hourly_rate: this.hourly_rate, exceed_rate: this.exceed_rate})
+            await ax.patch(`/service/${this.selectedServiceId}`, {hourly_rate: this.hourly_rate })
             .then( () => {
                 this.showUpdateService = false;
                 window.$notif('success', 'Updated A Companion Service', 'Successfully Updated A Companion Service');
