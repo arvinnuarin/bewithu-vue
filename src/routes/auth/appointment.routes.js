@@ -30,7 +30,7 @@ const appointmentRoutes = [
         },
         beforeEnter: (to, from, next) => {
             function apptStat (param) {
-               const status = [{ type: 'active', name: 'Active' }, 
+               const status = [{ type: 'pending', name: 'Pending' }, { type: 'scheduled', name: 'Scheduled' },
                { type: 'completed', name: 'Completed' }, { type: 'cancelled', name: 'Cancelled' }]
       
                return _.find(status, {type: param});

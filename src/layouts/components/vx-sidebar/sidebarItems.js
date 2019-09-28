@@ -69,9 +69,15 @@ export default [
     header: "Appointments",
   },
   {
-    url: '/appointments/active',
-    name: "Active Appointments",
-    slug: "appointment-active",
+    url: '/appointments/pending',
+    name: "Pending Appointments",
+    slug: "appointment-pending",
+    icon: "LayoutIcon",
+  },
+  {
+    url: '/appointments/scheduled',
+    name: "Scheduled",
+    slug: "appointment-scheduled",
     icon: "LayoutIcon",
   },
   {

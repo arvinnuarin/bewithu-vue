@@ -21,13 +21,13 @@
             <template slot-scope="{data}">
                 <vs-tr :key="indextr" v-for="(tr, indextr) in data">
 
-                    <vs-td :data="data[indextr].name"> {{ setName(data[indextr].name)}} </vs-td>
-                    <vs-td :data="data[indextr].gender"> {{ data[indextr].gender}} </vs-td>
-                    <vs-td :data="data[indextr].phone"> {{ data[indextr].phone}} </vs-td>
-                    <vs-td :data="data[indextr].email"> {{ data[indextr].email}} </vs-td>
-                    <vs-td :data="data[indextr].address"> {{ data[indextr].address}} </vs-td>
-                    <vs-td :data="data[indextr].id"> <vs-button color="danger" type="gradient" 
-                    @click="openConfirmStatus(data[indextr].id)">{{ data[indextr].isActive ? 'Block' : 'Reactivate' }}</vs-button></vs-td>
+                    <vs-td :data="tr.name"> {{ setName(tr.name)}} </vs-td>
+                    <vs-td :data="tr.gender"> {{ tr.gender}} </vs-td>
+                    <vs-td :data="tr.phone"> {{ tr.phone}} </vs-td>
+                    <vs-td :data="tr.email"> {{ tr.email}} </vs-td>
+                    <vs-td :data="tr.address"> {{ tr.address}} </vs-td>
+                    <vs-td :data="tr.id"> <vs-button color="danger" type="gradient" 
+                    @click="openConfirmStatus(tr.id)">{{ tr.isActive ? 'Block' : 'Reactivate' }}</vs-button></vs-td>
                 </vs-tr>
             </template>
         </vs-table>
