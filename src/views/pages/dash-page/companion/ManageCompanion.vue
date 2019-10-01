@@ -23,12 +23,12 @@
 
              <template slot-scope="{data}">
                 <vs-tr :key="idx" v-for="(tr, idx) in data">
-
-                    <vs-td :data="data[idx].name"> {{ fullName(data[idx].name)}} </vs-td>
-                    <vs-td :data="data[idx].gender"> {{ data[idx].gender }} </vs-td>
-                    <vs-td :data="data[idx].email"> {{ data[idx].email}} </vs-td>
-                    <vs-td :data="data[idx].phone"> {{ data[idx].phone}} </vs-td>
-                    <vs-td :data="data[idx].status"> {{ data[idx].status}} </vs-td>
+                    <vs-td :data="tr.image"><img width="80" height="100"  class="img-thumbnail" :src="tr.image"></vs-td>
+                    <vs-td :data="tr.name"> {{ fullName(tr.name)}} </vs-td>
+                    <vs-td :data="tr.gender"> {{ tr.gender }} </vs-td>
+                    <vs-td :data="tr.email"> {{ tr.email}} </vs-td>
+                    <vs-td :data="tr.phone"> {{ tr.phone}} </vs-td>
+                    <vs-td :data="tr.status"> {{ tr.status}} </vs-td>
                 </vs-tr>
             </template>
         </vs-table>

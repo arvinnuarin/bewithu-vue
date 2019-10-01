@@ -194,7 +194,7 @@ export default {
         // AUTHENTICATED USER
         user() {
           return {
-            displayName: 'Arvin'
+            displayName: 'Hello Admin!'
           }
          //return this.$store.state.auth.user
         },

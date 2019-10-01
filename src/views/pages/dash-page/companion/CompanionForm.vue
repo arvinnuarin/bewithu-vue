@@ -72,7 +72,7 @@
         <div class="vx-col w-full">
             <h4>Companion Images</h4>
             <div>
-                <vs-upload multiple automatic limit="3" accept=".jpg" text="Upload Picture" action="https://jsonplaceholder.typicode.com/posts/" @on-success="onSuccessUpload" />
+                <vs-upload limit="1" accept=".jpg" text="Upload Picture" action=""/>
             </div>
         </div>
     </div>
@@ -122,37 +122,36 @@ export default {
             },
             address: '',
             desc: null,
-            images: { 
-                image_1: null,
-                image_2: null,
-                image_3: null
-            }
+            imageData: null
         }
     },
     methods: {
+
+        async createCompanion() {
+             const payload = {
+                name: this.name, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
+                email: this.email, sns: this.social, address: this.address, desc: this.desc,
+            };
+            
+            await ax.post('/companion', payload).then(() => {
+
+                window.$notif('success', 'Added Companion', 'A new companion has been added.');
+                return router.replace('/companions/manage');
+
+            }).catch(() => {
+                return window.$notif('error', 'Unable to add companion', 'Sorry something went wrong. Please try again later.');
+            });
+        },
         onSubmit() {
-            this.$validator.validateAll().then( res => {
+
+           /* this.$validator.validateAll().then( res => {
                 if(res) { // no errrors
-
-                    const payload = {
-                        name: this.name, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
-                        email: this.email, sns: this.social, address: this.address, desc: this.desc,
-                        image: this.images
-                    };
-
-                    ax.post('/companion', payload).then(res => {
-
-                        $notif('success', 'Added Companion', 'A new companion has been added.');
-                        router.replace('/companions/manage');
-
-                    }).catch(() => {
-                        $notif('error', 'Unable to add companion', 'Sorry something went wrong. Please try again later.');
-                    });
-
+                    this.createCompanion();
                 } else {
                     window.$notif('error', 'Invalid Companion Form.', 'Please check your inputs and try again.');
                 }
-            });
+            });*/
+            this.createCompanion();
         },
         onSuccessUpload() {
             console.log('success')

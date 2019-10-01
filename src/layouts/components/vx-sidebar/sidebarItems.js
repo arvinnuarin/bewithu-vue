@@ -24,21 +24,6 @@ export default [
     icon: "HomeIcon",
   },
   {
-    header: "Apps",
-  },
-  {
-    url: "/apps/todo",
-    name: "Todo",
-    slug: "todo",
-    icon: "CheckSquareIcon",
-  },
-  {
-    url: "/apps/calendar",
-    name: "Calendar",
-    slug: "calendar",
-    icon: "CalendarIcon",
-  },
-  {
     header: "Companion",
   },
   {
