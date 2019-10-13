@@ -19,7 +19,6 @@ Vue.use(Vuex)
 import moduleAuth from './auth/moduleAuth'
 import moduleTodo from './todo/moduleTodo'
 import moduleCalendar from './calendar/moduleCalendar'
-import moduleNotication from './notif/moduleNotif'
 import moduleReport from './report/moduleReport'
 
 export default new Vuex.Store({
@@ -30,8 +29,7 @@ export default new Vuex.Store({
     modules: {
       auth: moduleAuth,  
       todo: moduleTodo,
-      calendar: moduleCalendar, 
-      notif: moduleNotication,
+      calendar: moduleCalendar,
       report: moduleReport
     },
     strict: process.env.NODE_ENV !== 'production'

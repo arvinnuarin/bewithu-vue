@@ -17,6 +17,10 @@
                 <vs-input :danger="errors.has('name')" danger-text="Please input service name." name="name" val-icon-danger="clear" v-validate="'required'" class="w-full" placeholder="Service Name" v-model="name" />
                 <vs-input :danger="errors.has('desc')" :danger-text="errors.first('desc')" name="desc" val-icon-danger="clear" v-validate="'required|max:50'" class="w-full mt-5" placeholder="Description" v-model="desc" />
                 <vs-input :danger="errors.has('hourly_rate')" :danger-text="errors.first('hourly_rate')" name="hourly_rate" val-icon-danger="clear" v-validate="'required|decimal|max:10'" class="w-full mt-5" placeholder="Hourly Rate" v-model="hourly_rate" />
+                <div class="mt-3 w-full">
+                    <label>Service Image</label><br>
+                     <input id="srvimage" type="file" accept="image/*" @change="uploadImage($event)" />
+                </div>
             </div>
         </vs-prompt>
         <!-- Update Services -->
@@ -29,7 +33,6 @@
             <div class="con-exemple-prompt">
                 <vs-input class="w-full" placeholder="Service Name" v-model="name" disabled/>
                 <vs-input :danger="errors.has('hourly_rate')" :danger-text="errors.first('hourly_rate')" name="hourly_rate" val-icon-danger="clear" v-validate="'required|decimal|max:10'" class="w-full mt-5" placeholder="Normal Rates (3 Hours)" v-model="hourly_rate" />
-                <vs-input :danger="errors.has('exceed_rate')" :danger-text="errors.first('exceed_rate')" name="exceed_rate" val-icon-danger="clear" v-validate="'required|decimal|max:10'" class="w-full mt-5" placeholder="Exceeding Rate per hour" v-model="exceed_rate" />
             </div>
         </vs-prompt>
         <!-- New Service Button -->
@@ -80,7 +83,8 @@ export default {
             name: '',
             desc: '',
             hourly_rate: null,
-            selectedServiceId: null
+            selectedServiceId: null,
+            imageURL: null
         }
     },
     methods: {
@@ -111,7 +115,7 @@ export default {
             this.persistDialog();
             this.$validator.validateAll().then( res => {
                 if(res) {
-                   this.onSubmitService();
+                    this.onSubmitService();
                 }
                 else return window.$notif('error', 'Invalid Input', 'Please check your inputs and try again.');
             });
@@ -120,14 +124,24 @@ export default {
 
             this.$vs.loading();
 
-            await ax.post('/service', {name: this.name, desc: this.desc, hourly_rate: this.hourly_rate})
-            .then( () => {
+             const fd = new FormData();
+            fd.append('image', document.getElementById("srvimage").files[0], document.getElementById("srvimage").files[0].name); 
 
-                this.showAddService = false;
-                window.$notif('success', 'Added A Companion Service', 'Successfully Added A Companion Service');
-                this.initServices(); // get services
+            await ax.post('/image', fd, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+            }).then( res => {
+
+                ax.post('/service', {name: this.name, desc: this.desc, hourly_rate: this.hourly_rate, image: res.data})
+                .then( () => {
+                    this.showAddService = false;
+                    window.$notif('success', 'Added A Companion Service', 'Successfully Added A Companion Service');
+                    this.initServices(); // get services
+                }).catch( () => window.$notif('error', 'Adding Service Failed', 'Unable to add companion service. Please try again later.'))
+        
             }).catch( () => window.$notif('error', 'Adding Service Failed', 'Unable to add companion service. Please try again later.'))
-            
+                
             this.$vs.loading.close();
         },
         persistUpdateDialog() {
@@ -149,6 +163,25 @@ export default {
                 }
                 else return window.$notif('error', 'Invalid Input', 'Please check your inputs and try again.');
             });
+        },
+        uploadImage(event) {
+            
+           /* const fd = new FormData();
+            fd.append('image', event.target.files[0], event.target.files[0].name); 
+
+            ax.post('/image', fd, {
+                headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+            }).then( res => {
+                console.log(res.data);
+                this.imageURL = res.data;
+                window.$notif('success', 'Image Upload', 'Image Upload is successful.');
+                return this.imageURL;
+            }).catch( err => {  
+                this.imageURL = null;
+                return this.imageURL;
+            }); */
         },
         async onSubmitUpdateService() { // updating service action
 

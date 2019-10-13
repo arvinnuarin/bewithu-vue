@@ -24,6 +24,12 @@ export default [
     icon: "HomeIcon",
   },
   {
+    url: '/schedule',
+    name: "Schedules",
+    slug: "schedule",
+    icon: "HomeIcon",
+  },
+  {
     header: "Companion",
   },
   {
@@ -46,7 +52,7 @@ export default [
   },
   {
     url: '/companions/service-rates',
-    name: "Manage Rates",
+    name: "Services",
     slug: "rates",
     icon: "LayoutIcon"
   },

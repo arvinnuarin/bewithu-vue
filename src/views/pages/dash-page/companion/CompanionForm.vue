@@ -72,7 +72,7 @@
         <div class="vx-col w-full">
             <h4>Companion Images</h4>
             <div>
-                <vs-upload limit="1" accept=".jpg" text="Upload Picture" action=""/>
+                 <input id="cmpImage" type="file" accept="image/*">
             </div>
         </div>
     </div>
@@ -122,39 +122,50 @@ export default {
             },
             address: '',
             desc: null,
-            imageData: null
         }
     },
     methods: {
 
         async createCompanion() {
-             const payload = {
-                name: this.name, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
-                email: this.email, sns: this.social, address: this.address, desc: this.desc,
-            };
+             
+            this.$vs.loading();
+
+            let frmData = new FormData();
+            frmData.append('image', document.getElementById("cmpImage").files[0], document.getElementById("cmpImage").files[0].name); 
+
+            await ax.post('/image', frmData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+            }).then( res => {
+                
+                const payload = {
+                    name: this.name, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
+                    email: this.email, sns: this.social, address: this.address, desc: this.desc,
+                    image: res.data
+                };
             
-            await ax.post('/companion', payload).then(() => {
+                ax.post('/companion', payload).then(() => {
 
-                window.$notif('success', 'Added Companion', 'A new companion has been added.');
-                return router.replace('/companions/manage');
+                    window.$notif('success', 'Added Companion', 'A new companion has been added.');
+                    return router.replace('/companions/manage');
 
-            }).catch(() => {
+                }).catch(() => {
+                    return window.$notif('error', 'Unable to add companion', 'Sorry something went wrong. Please try again later.');
+                });
+            }).catch( () => {  
                 return window.$notif('error', 'Unable to add companion', 'Sorry something went wrong. Please try again later.');
             });
+
+            this.$vs.loading.close();
         },
         onSubmit() {
 
-           /* this.$validator.validateAll().then( res => {
+           this.$validator.validateAll().then( res => {
                 if(res) { // no errrors
                     this.createCompanion();
                 } else {
                     window.$notif('error', 'Invalid Companion Form.', 'Please check your inputs and try again.');
                 }
-            });*/
-            this.createCompanion();
-        },
-        onSuccessUpload() {
-            console.log('success')
+            });
         }
     }
 }

@@ -54,7 +54,6 @@ export default {
         async initCompanions() { // retrieve list of companions
             await ax.get('/companion').then( res => {
                 this.users = res.data;
-                console.log(res.data);
             }).catch(err => {
 
             });

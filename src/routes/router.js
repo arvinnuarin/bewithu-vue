@@ -62,7 +62,14 @@ const router = new Router({
                         rule: 'editor'
                     }
                 },
-
+                {
+                    path: '/schedule',
+                    name: 'schedule',
+                    component: () => import('@/views/pages/dash-page/schedule/ScheduleCalendar.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
 
         // =============================================================================
         // Dashboard Routes (Authenticated)
