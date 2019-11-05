@@ -19,12 +19,12 @@
             <!-- DATA -->
             <div class="flex justify-between text-center" slot="no-body-bottom">
                 <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0">
-                    <p class="mt-4">Scheduled</p>
-                    <p class="mb-4 text-3xl font-semibold">{{ appointment.pending }}</p>
+                    <p class="mt-4">Completed</p>
+                    <p class="mb-4 text-3xl font-semibold">{{ appointment.completed }}</p>
                 </div>
                 <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0">
-                    <p class="mt-4">Completed</p>
-                    <p class="mb-4 text-3xl font-semibold"> {{ appointment.completed }}</p>
+                    <p class="mt-4">All Appointments</p>
+                    <p class="mb-4 text-3xl font-semibold"> {{ appointment.all }}</p>
                 </div>
             </div>
         </vx-card>
@@ -36,18 +36,17 @@ import VueApexCharts from 'vue-apexcharts'
 
 export default {
     name: 'dashboard-appointment-ratio',
-    data() {
-        return {
-            appointment: this.$store.state.report.appointment
-        }
-    },
+    props: ['appointment'],
     components: {
         VueApexCharts
     },
     computed: {
+        ratio() {
+            return (this.appointment.completed / this.appointment.all) * 100
+        },
         appointmentRatioRadialBar() {
             return {
-                series: [this.appointment.ratio],
+                series: [this.ratio],
                 chartOptions: {
                     plotOptions: {
                         radialBar: {

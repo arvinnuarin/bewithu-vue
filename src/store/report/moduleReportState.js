@@ -7,10 +7,11 @@
 
 export default {
   dash: {
-    users: 100,
-    sales: 300,
-    expenses: 400,
-    appointment: 600
+    users: 0,
+    sales: 0,
+    expenses: 0,
+    appointment: 0,
+    appt_completed: 0
   },
   appointment: {
     pending: 30,
@@ -19,8 +20,8 @@ export default {
   },
   sales: {
     this_month: 500,
-    last_month: 700,
-    history: [10,20,30,40,50,60,70,80,90,100,110,120]
+    last_month: 0,
+    history: [0,0,0,0,0,0,0,0,0,0,110,0]
   }
 }
 // { id, isRead, title, msg, icon, category, created_at, callback_url}

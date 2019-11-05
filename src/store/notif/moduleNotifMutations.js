@@ -7,7 +7,10 @@
 
 export default {
   
-  SET_REPORTS_DATA(state, data) {
-    state.dash = data;
+  SET_NOTIFICATION(state, notifs) {
+    state.notifsArray = notifs;
+  },
+  ADD_NOTIFICATION(state, newNotif) {
+    state.notifsArray.unshift(newNotif);
   }
 }

@@ -12,11 +12,11 @@
                 <div class="flex">
                     <div class="mr-6">
                         <p class="mb-1 font-semibold">This Month</p>
-                        <p class="text-3xl text-success">{{ sales.this_month | currency}}</p>
+                        <p class="text-3xl text-success">{{ this.sales | currency}}</p>
                     </div>
                     <div>
                         <p class="mb-1 font-semibold">Last Month</p>
-                        <p class="text-3xl">{{ sales.last_month | currency }}</p>
+                        <p class="text-3xl">{{ 0 | currency }}</p>
                     </div>
                 </div>
                 <vue-apex-charts type=line height=266 :options="monthlySalesGraph.chartOptions" :series="monthlySalesGraph.series" />
@@ -34,17 +34,16 @@ export default {
     components: {
         VueApexCharts
     },
-    data() {
-        return {
-            sales: this.$store.state.report.sales
-        }
-    },
+    props: ['sales'],
     computed: {
+        history() {
+            return [0,0,0,0,0,0,0,0,0,0,this.sales,0]
+        },
         monthlySalesGraph() {
             return {
                  series: [{
                         name: "Monthly Sales",
-                        data: this.sales.history
+                        data: this.history
                     },
                 ],
                 chartOptions: {

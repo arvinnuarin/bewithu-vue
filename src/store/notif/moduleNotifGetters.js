@@ -1,13 +1,7 @@
 /*=========================================================================================
-  File Name: moduleNotifMutations.js
-  Description: Notification Module Mutations
+  File Name: moduleNotifGetters.js
+  Description: Notification Module Getters
   ----------------------------------------------------------------------------------------
   Author: John Arvin Nuarin
 ==========================================================================================*/
 
-export default {
-  
-  SET_REPORTS_DATA(state, data) {
-    state.dash = data;
-  }
-}

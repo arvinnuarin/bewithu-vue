@@ -51,6 +51,18 @@ const generalRoutes = [
             pageTitle: 'Service Rates',
             rule: 'editor'
         },
+    },
+    {
+        path: '/companions/rest-day',
+        name: 'rest-day',
+        component: () => import('@/views/pages/dash-page/companion/RestDay.vue'),
+        meta: {
+            breadcrumb: [
+                { title: 'Dashboard', url: '/dashboard' },
+                { title: 'Rest Days', active: true}],
+            pageTitle: 'Companion Rest Days',
+            rule: 'editor'
+        },
     }
 ];
 

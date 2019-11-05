@@ -24,19 +24,13 @@ export default [
     icon: "HomeIcon",
   },
   {
-    url: '/schedule',
-    name: "Schedules",
-    slug: "schedule",
-    icon: "HomeIcon",
-  },
-  {
     header: "Companion",
   },
   {
     url: null,
     name: "Companions",
     slug: "pos",
-    icon: "ListIcon",
+    icon: "GithubIcon",
     submenu: [
       {
         url: '/companions/add',
@@ -48,40 +42,45 @@ export default [
         name: "Manage Companions",
         slug: "companion-manage",
       },
+      {
+        url: '/companions/rest-day',
+        name: "Companion Rest Day",
+        slug: "companion-rest-day",
+      },
     ]
   },
   {
     url: '/companions/service-rates',
     name: "Services",
     slug: "rates",
-    icon: "LayoutIcon"
+    icon: "BriefcaseIcon"
   },
   {
     header: "Appointments",
   },
   {
     url: '/appointments/pending',
-    name: "Pending Appointments",
+    name: "Pending",
     slug: "appointment-pending",
-    icon: "LayoutIcon",
+    icon: "AlertCircleIcon",
   },
   {
     url: '/appointments/scheduled',
     name: "Scheduled",
     slug: "appointment-scheduled",
-    icon: "LayoutIcon",
+    icon: "ClipboardIcon",
   },
   {
     url: '/appointments/completed',
     name: "Completed",
     slug: "appointment-completed",
-    icon: "LayoutIcon",
+    icon: "CheckSquareIcon",
   },
   {
     url: '/appointments/cancelled',
     name: "Cancelled",
     slug: "appointment-cancelled",
-    icon: "LayoutIcon",
+    icon: "CloudOffIcon",
   },
   {
     header: "Customers",
@@ -90,13 +89,13 @@ export default [
     url: '/customers/active',
     name: "Active Customers",
     slug: "customer-active",
-    icon: "LayoutIcon",
+    icon: "UserCheckIcon",
   },
   {
     url: '/customers/inactive',
     name: "Inactive Customers",
     slug: "customer-inactive",
-    icon: "LayoutIcon",
+    icon: "UserXIcon",
   },
   {
     header: "Accounting",
@@ -105,24 +104,13 @@ export default [
     url: '/accounting/transactions/appointment',
     name: "Transactions",
     slug: "transactions",
-    icon: "LayoutIcon",
+    icon: "DollarSignIcon",
   },
   {
-    url: null,
-    name: "Accounting",
-    icon: "LayoutIcon",
-    submenu: [
-      {
-        url: '/accounting/sales',
-        name: "Sales",
-        slug: "sales",
-      },
-      {
-        url: '/accounting/expenses',
-        name: "Expenses",
-        slug: "expenses",
-      },
-    ]
+    url: '/accounting/expenses',
+    name: "Expenses",
+    icon: "TrendingUpIcon",
+    slug: "expenses",
   },
   {
     header: "Settings",
@@ -131,12 +119,12 @@ export default [
     url: '/settings/user/profile',
     name: "User Profile",
     slug: "user-profile",
-    icon: "LayoutIcon",
+    icon: "UserIcon",
   },
   {
     url: '/settings/manage-users',
     name: "Manage Users",
     slug: "manage-users",
-    icon: "LayoutIcon",
+    icon: "UsersIcon",
   },
 ]

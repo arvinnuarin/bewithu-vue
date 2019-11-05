@@ -14,9 +14,9 @@ try {
 } catch(e) {
   token = null;
 }
-// baseURL: 'https://bewithu-appt.herokuapp.com/api/admin/'
+// ',
 const ax = axios.create({
-    baseURL: 'http://localhost:8000/api/admin/',
+    baseURL: 'https://bewithu-appt.herokuapp.com/api/admin/',
     timeout: 10000,
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 
     'X-Requested-With': 'XMLHttpRequest', 'Authorization': token}

@@ -47,10 +47,14 @@
                     <vs-td :data="tr.location"> {{ tr.location}} </vs-td>
                     <vs-td :data="tr.status"> {{ tr.status}} </vs-td>
                     <vs-td :data="tr.id">
-                        <vs-button v-if="$route.params.status === 'pending'" color="primary" type="gradient" 
-                            @click="showAddPaymentTrans(tr.id)">Payment</vs-button>
-                            <vs-button v-if="$route.params.status === 'scheduled'" color="danger" type="gradient" 
-                            @click="openConfirmCancel(tr.id)">Cancel</vs-button>
+                        <div v-if="$route.params.status === 'pending'">
+                            <vs-button color="primary" type="gradient" @click="showAddPaymentTrans(tr.id)">Payment</vs-button>
+                            <vs-button color="danger" type="gradient" @click="openConfirmCancel(tr.id)">Cancel</vs-button>
+                        </div>
+                            <div v-if="$route.params.status === 'scheduled'">
+                                <vs-button color="danger" type="gradient" @click="openConfirmCancel(tr.id)">Cancel</vs-button>
+                                <vs-button color="success" type="gradient" @click="openConfirmEnded(tr.id)">Ended</vs-button>
+                            </div>
                     </vs-td>
                 </vs-tr>
             </template>
@@ -130,6 +134,13 @@ export default {
         
             this.$vs.loading.close();
         },
+        async completeAppointment() {
+            this.$vs.loading();
+
+            await ax.patch(`/appointments/transactions/${this.selectedAppointmentId}`)
+             .then(() => this.initAppointments(this.$route.params.status), window.$notif('success', 'Appointment Fulfillment', 'Appointment has been fulfilled.'))
+            .catch(err => window.$notif('error', 'Unable to fulfill appointment.', err.response.data.message));
+        },
         setName(name) {
             const finalName = JSON.parse(name);
             return `${finalName.first} ${finalName.last}`;
@@ -166,6 +177,18 @@ export default {
                 title: `Confirm`,
                 text: 'Do you want to cancel this appointment?',
                 accept: this.cancelAppointment
+            })
+        },
+        openConfirmEnded(appointId) { // open cancellation confirmation dialog
+            
+            this.selectedAppointmentId = appointId; // get the selected appointmentId
+
+            this.$vs.dialog({
+                type: 'confirm',
+                color: 'danger',
+                title: `Confirm`,
+                text: 'Are you sure that this appointment is already fulfilled?',
+                accept: this.completeAppointment
             })
         },
     }

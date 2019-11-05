@@ -6,6 +6,7 @@
   Author: John Arvin Nuarin
 ========================================================================================== -->
 <template>
+    
     <!-- NOTIFICATIONS -->
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer ml-4">
     <feather-icon icon="BellIcon" class="cursor-pointer mt-1 sm:mr-6 mr-2" :badge="notifications.length"></feather-icon>
@@ -13,16 +14,16 @@
 
         <div class="notification-top text-center p-5 bg-primary text-white">
         <h3 class="text-white">{{ notifications.length }} New</h3>
-        <p class="opacity-75">App Notifications</p>
+        <p class="opacity-75">Appointment Notifications</p>
         </div>
 
         <VuePerfectScrollbar ref="mainSidebarPs" class="scroll-area--nofications-dropdown p-0 mb-10" :settings="settings">
         <ul class="bordered-items">
-        <li v-for="ntf in notifications" :key="ntf.index" class="flex justify-between px-4 py-4 notification cursor-pointer">
+        <li v-for="ntf in notifications" :key="ntf.index" class="flex justify-between px-4 py-4 notification cursor-pointer" @click="removeNotification(ntf.id)">
             <div class="flex items-start">
-            <feather-icon :icon="ntf.icon" :svgClasses="[`text-${ntf.category}`, 'stroke-current mr-1 h-6 w-6']"></feather-icon>
+            <feather-icon :icon="icon(ntf.status)" :svgClasses="[`${category(ntf.status)}`, 'stroke-current mr-1 h-6 w-6']"></feather-icon>
             <div class="mx-2">
-                <span class="font-medium block notification-title" :class="[`text-${ntf.category}`]">{{ ntf.title }}</span>
+                <span class="font-medium block notification-title" :class="category(ntf.status)">{{ ntf.title }}</span>
                 <small>{{ ntf.msg }}</small>
             </div>
             </div>
@@ -47,7 +48,7 @@
                     border-solid
                     d-theme-border-grey-light
                     cursor-pointer">
-                    <span>View All Notifications</span>
+                    <span>Appointment Notifications</span>
                 </div>
     </vs-dropdown-menu>
     </vs-dropdown>
@@ -63,9 +64,15 @@ export default {
         VuePerfectScrollbar
     },
     mounted() {
-        window.Echo.channel('admin-notifs') //Should be Channel Name
-        .listen('NewAppointmentPending', (e) => {
-           console.log(e)
+        
+        this.$store.dispatch('notif/getNotifications');
+        
+        window.Echo.channel('admin') //Should be Channel Name
+        .listen('.appointment', (e) => {
+        
+           const notif = JSON.parse(e.data);
+           this.$store.commit('notif/ADD_NOTIFICATION', notif);
+            window.$notif('success', notif.title, notif.msg);
         });
     },
     data() {
@@ -74,13 +81,7 @@ export default {
                 maxScrollbarLength: 60,
                 wheelSpeed: .60,
             },
-            notifications:[
-                { index: 0, title: 'New Message', msg: 'Are your going to meet me tonight?', icon: 'MessageSquareIcon', time: 'Wed Jan 30 2019 07:45:23 GMT+0000 (GMT)', category: 'primary' },
-                { index: 1, title: 'New Order Recieved', msg: 'You got new order of goods.', icon: 'PackageIcon', time: 'Wed Jan 30 2019 07:45:23 GMT+0000 (GMT)', category: 'success' },
-                { index: 2, title: 'Server Limit Reached!', msg: 'Server have 99% CPU usage.', icon: 'AlertOctagonIcon', time: 'Thu Jan 31 2019 07:45:23 GMT+0000 (GMT)', category: 'danger' },
-                { index: 3, title: 'New Mail From Peter', msg: 'Cake sesame snaps cupcake', icon: 'MailIcon', time: 'Fri Feb 01 2019 07:45:23 GMT+0000 (GMT)', category: 'primary' },
-                { index: 4, title: 'Bruce\'s Party', msg: 'Chocolate cake oat cake tiramisu', icon: 'CalendarIcon', time: 'Fri Feb 02 2019 07:45:23 GMT+0000 (GMT)', category: 'warning' },
-            ]
+            showDetail: false
         }
     },
     methods: {
@@ -118,6 +119,26 @@ export default {
 
             return 'Just Now'
         },
+        category(status) {
+            const categories = [{status: 'pending', category: 'primary'}, {status: 'paid', category: 'success'},
+            {status: 'cancelled', category: 'danger'}, {status: 'completed', category: 'warning'}]; 
+
+            return `text-${categories.find(s => s.status === status).category}`;
+        },
+        icon(status) {
+            const icons = [{status: 'pending', icon: 'AlertCircleIcon'}, {status: 'paid', icon: 'ClipboardIcon'},
+            {status: 'cancelled', icon: 'CheckSquareIcon'}, {status: 'completed', icon: 'CloudOffIcon'}];
+        
+            return icons.find(s => s.status === status).icon
+        },
+        removeNotification(id) {
+            console.log(id)
+        }
+    },
+    computed: {
+        notifications() {
+            return this.$store.state.notif.notifsArray;
+        }
     }
 }
 </script>

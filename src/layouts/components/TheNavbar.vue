@@ -65,7 +65,7 @@
         <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
           <div class="con-img ml-3">
             <img key="localImg"
-              :src="require(`@/assets/images/portrait/small/avatar-s-1.png`)"
+              src="https://static.giantbomb.com/uploads/original/13/133617/2616399-doraemon_pic.jpg"
               alt="user-img"
               width="40"
               height="40"
@@ -120,6 +120,9 @@ export default {
       VuePerfectScrollbar,
       draggable,
       TheNotifBar
+    },
+    created() {
+      this.$store.dispatch('auth/setAuthenticatedUser');
     },
     props: {
         navbarColor: {
@@ -193,10 +196,7 @@ export default {
         },
         // AUTHENTICATED USER
         user() {
-          return {
-            displayName: 'Hello Admin!'
-          }
-         //return this.$store.state.auth.user
+          return this.$store.state.auth.user
         },
     },
     methods: {

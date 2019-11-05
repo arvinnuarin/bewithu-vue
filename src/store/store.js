@@ -5,7 +5,6 @@
   Author: John Arvin Nuarin
 ==========================================================================================*/
 
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -20,6 +19,7 @@ import moduleAuth from './auth/moduleAuth'
 import moduleTodo from './todo/moduleTodo'
 import moduleCalendar from './calendar/moduleCalendar'
 import moduleReport from './report/moduleReport'
+import moduleNotif from './notif/moduleNotif'
 
 export default new Vuex.Store({
     getters,
@@ -30,7 +30,8 @@ export default new Vuex.Store({
       auth: moduleAuth,  
       todo: moduleTodo,
       calendar: moduleCalendar,
-      report: moduleReport
+      report: moduleReport,
+      notif: moduleNotif
     },
     strict: process.env.NODE_ENV !== 'production'
 })

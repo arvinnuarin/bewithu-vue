@@ -19,7 +19,7 @@
                 <vs-input :danger="errors.has('hourly_rate')" :danger-text="errors.first('hourly_rate')" name="hourly_rate" val-icon-danger="clear" v-validate="'required|decimal|max:10'" class="w-full mt-5" placeholder="Hourly Rate" v-model="hourly_rate" />
                 <div class="mt-3 w-full">
                     <label>Service Image</label><br>
-                     <input id="srvimage" type="file" accept="image/*" @change="uploadImage($event)" />
+                     <input id="srvimage" type="file" accept="image/*" />
                 </div>
             </div>
         </vs-prompt>
@@ -163,25 +163,6 @@ export default {
                 }
                 else return window.$notif('error', 'Invalid Input', 'Please check your inputs and try again.');
             });
-        },
-        uploadImage(event) {
-            
-           /* const fd = new FormData();
-            fd.append('image', event.target.files[0], event.target.files[0].name); 
-
-            ax.post('/image', fd, {
-                headers: {
-                'Content-Type': 'multipart/form-data'
-                }
-            }).then( res => {
-                console.log(res.data);
-                this.imageURL = res.data;
-                window.$notif('success', 'Image Upload', 'Image Upload is successful.');
-                return this.imageURL;
-            }).catch( err => {  
-                this.imageURL = null;
-                return this.imageURL;
-            }); */
         },
         async onSubmitUpdateService() { // updating service action
 

@@ -20,6 +20,10 @@ const logoutAction = () => {
 };
 
 export default {
+    
+    setAuthenticatedUser({ commit } ) {
+        commit('UPDATE_AUTHENTICATED_USER', JSON.parse(localStorage.userInfo));
+    },
     async login({ commit }, payload) { //login user
 
         await ax.post('/auth/login', payload).then(user => {

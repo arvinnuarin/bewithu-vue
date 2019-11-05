@@ -23,20 +23,19 @@
 
 <script>
 
-
 import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
 import analyticsData from '@/views/ui-elements/card/analyticsData.js'
 
 export default {
     name: 'dashboard-tiles',
+    components: {
+        StatisticsCardLine
+    },
+    props: ['dashtiles'],
     data() {
         return {
             analyticsData: analyticsData,
-            dashtiles: this.$store.state.report.dash,
         } 
     },
-    components: {
-        StatisticsCardLine
-    }
 }
 </script>

@@ -1,13 +1,11 @@
 /*=========================================================================================
-  File Name: moduleNotifMutations.js
-  Description: Notification Module Mutations
+  File Name: moduleNotifState.js
+  Description: Notification Module State
   ----------------------------------------------------------------------------------------
   Author: John Arvin Nuarin
 ==========================================================================================*/
 
 export default {
-  
-  SET_REPORTS_DATA(state, data) {
-    state.dash = data;
-  }
+  notifsArray: [],
 }
+// { id, isRead, title, msg, icon, category, created_at, callback_url}

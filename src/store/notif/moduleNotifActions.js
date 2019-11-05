@@ -1,13 +1,16 @@
 /*=========================================================================================
-  File Name: moduleNotifMutations.js
-  Description: Notification Module Mutations
+  File Name: moduleNotifActions.js
+  Description: Notification Module Actions
   ----------------------------------------------------------------------------------------
   Author: John Arvin Nuarin
 ==========================================================================================*/
 
+import ax from '@/axiosInstance'
+
 export default {
-  
-  SET_REPORTS_DATA(state, data) {
-    state.dash = data;
-  }
+
+  async getNotifications({ commit }) {
+    await ax.get('/notification').then(res => commit('SET_NOTIFICATION', res.data))
+    .catch(() => commit('SET_NOTIFICATION', []));
+  },
 }
