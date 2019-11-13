@@ -47,7 +47,7 @@
                                     icon-pack="feather"
                                     label-placeholder="Password"
                                     v-model="password"
-                                    class="w-full mt-6 no-icon-border" />
+                                    class="w-full mt-6 no-icon-border" @keydown.enter.native="login"/>
                                 <span class="text-danger text-sm">{{ errors.first('password') }}</span>
 
                                 <div class="flex flex-wrap justify-between my-5">
