@@ -61,6 +61,18 @@
                 </div>
             </vx-card>
         </div>
+         <div class="vx-col md:w-3/4 lg:w-3/4">
+            <div class="vx-row">
+                <div class="vx-col w-full lg:w-1/2 md:w-1/2">
+                    
+                </div>
+                <div class="vx-col w-full lg:w-1/2 md:w-1/2 visible sm:invisible lg:visible md:invisible">
+                    <img src="https://heathmont.imgix.net/bitcasino/images/side-banners/circles.svg" class="default-side-banner-bg" alt="">
+                    <img src="https://heathmont.imgix.net/bitcasino/images/side-banners/paco-2x.png?auto=compress,format" srcset="https://heathmont.imgix.net/bitcasino/images/side-banners/paco.png?auto=compress,format, https://heathmont.imgix.net/bitcasino/images/side-banners/paco-2x.png?auto=compress,format 2x" 
+                    class="default-side-banner-character" alt="Log in">
+                </div>
+            </div>
+         </div>
     </div>
 </template>
 
@@ -103,3 +115,16 @@ export default {
     }
 }
 </script>
+<style scoped>
+.default-side-banner-bg {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.default-side-banner-character {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    max-width: 50%;
+}
+</style>

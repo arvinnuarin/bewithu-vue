@@ -18,47 +18,47 @@
 
 export default [
   {
-    header: "게임",
+    header: "GAMES",
   },
   {
-    url: '/companions/service-rates',
-    name: "슬롯",
-    slug: "rates",
+    url: '/games/slot',
+    name: "Slot",
+    slug: "slot",
   },
   {
-    url: '/companions/service-rates',
-    name: "잭팟 슬롯",
-    slug: "rates",
+    url: '/games/jackpot-slots',
+    name: "Jackpot Slots",
+    slug: "jackpot-slots",
   },
   {
-    url: '/companions/service-rates',
-    name: "버커라",
-    slug: "rates",
+    url: '/games/bacarrat',
+    name: "Bacarrat",
+    slug: "bacarrat",
   },
   {
-    url: '/companions/service-rates',
-    name: "불략잭",
-    slug: "rates",
+    url: '/games/blackjack',
+    name: "Blackjack",
+    slug: "blackjack",
   },
   {
-    url: '/companions/service-rates',
-    name: "롤렛",
-    slug: "rates",
+    url: '/games/roulettes',
+    name: "Roulette",
+    slug: "roulettes",
   },
   {
-    url: '/companions/service-rates',
-    name: "태아불 게임",
-    slug: "rates",
+    url: '/games/table-games',
+    name: "Table Games",
+    slug: "table-games",
   },
   {
-    url: '/companions/service-rates',
-    name: "모든 게임",
-    slug: "rates",
+    url: '/games/all-games',
+    name: "All Games",
+    slug: "all-games",
   },
   {
-    url: '/companions/service-rates',
-    name: "테마",
-    slug: "rates",
+    url: '/games/themes',
+    name: "Themes",
+    slug: "themes",
   },
   {
     url: null,
@@ -72,33 +72,33 @@ export default [
   },
 
   {
-    url: null,
-    name: "라이브 카시노",
-    slug: "appointment-pending",
+    url: '/games/live-casino',
+    name: "LIVE CASINO",
+    slug: "live-casino",
   },
   {
-    url: '/appointments/completed',
+    url: '/games/bombay-club',
     name: "BOMBAY CLUB",
-    slug: "appointment-completed",
+    slug: "bombay-club",
   },
   {
-    url: '/appointments/cancelled',
-    name: "공급자",
+    url: '/providers',
+    name: "PROVIDERS",
+    slug: "providers",
+  },
+  {
+    url: '/sportsbook',
+    name: "SPORTSBOOK",
     slug: "appointment-cancelled",
   },
   {
-    url: '/appointments/cancelled',
-    name: "슻포츠복",
+    url: '/promo',
+    name: "PROMO",
     slug: "appointment-cancelled",
   },
   {
-    url: '/appointments/cancelled',
-    name: "프로모션",
-    slug: "appointment-cancelled",
-  },
-  {
-    url: '/appointments/cancelled',
-    name: "고객선터",
-    slug: "appointment-cancelled",
+    url: '/support/help-center',
+    name: "HELP CENTRE",
+    slug: "help-centre",
   }
 ]

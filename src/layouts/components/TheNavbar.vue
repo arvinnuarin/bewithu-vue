@@ -22,7 +22,7 @@
         <!-- USER META -->
         <div class="the-navbar__user-meta flex items-center" v-if="user">
             <div class="text-right leading-tight hidden sm:block">
-            <p class="font-semibold">Arvin Nuarin</p>
+            <p class="font-semibold">{{ user.displayName }}</p>
             <small>μ₿ 0.00</small>
             </div>
             <!-- Deposit -->
