@@ -14,7 +14,7 @@ const logoutAction = () => {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('userRole');
     localStorage.removeItem('userInfo');
-    router.go('/auth/login');
+    router.go('/');
 
     notification('success', 'Successful Logout','Your session has been successfully terminated.');
 };
@@ -33,7 +33,7 @@ export default {
             
             commit('UPDATE_AUTHENTICATED_USER', {displayName: user.data.user.name, email: user.data.user.email, uid: user.data.user.id});
             notification('success', 'Successful Login', 'Thank you! You are now logged in.' );
-            router.go(router.currentRoute.query.to || '/dashboard');
+            router.replace('/');
 
         }).catch( () => {
             notification('error', 'Unable to Login', 'Please check your credentials and try again.');

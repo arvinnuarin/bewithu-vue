@@ -26,7 +26,8 @@ const customerRoutes = [
                 { title: 'Dashboard', url: '/dashboard' },
                 { title: 'Customer Account', active: true }],
             pageTitle: 'Customer Account',
-            rule: 'editor'
+            rule: 'editor',
+            requiresAuth: true
         },
         beforeEnter: (to, from, next) => {
             function apptStat (param) {

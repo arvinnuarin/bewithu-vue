@@ -108,10 +108,10 @@ export default {
         },
         async register() {
             await ax.post('/auth/register', { name: this.name, birthdate: this.birthdate, email: this.email, password: this.password, password_confirmation: this.confirm_password})
-            .then( res => {
+            .then( () => {
                 window.$notif('success', 'Successful Registration', 'Thank you for signing up. You may now login.')
-                setTimeout(3000, () => this.$router.replace('/'))
-            }).catch( err => {
+                this.$router.push('/')
+            }).catch( () => {
                 window.$notif('error', 'Signup Failed', 'There was a problem creating your account')
             })
         }

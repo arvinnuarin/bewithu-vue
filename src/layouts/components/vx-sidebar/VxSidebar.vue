@@ -3,9 +3,7 @@
     Description: Sidebar Component
     Component Name: VxSidebar
     ----------------------------------------------------------------------------------------
-    Item Name: Vuesax Admin - VueJS Dashboard Admin Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
+    Author: John Arvin Nuarin
 ========================================================================================== -->
 
 
@@ -14,10 +12,12 @@
         <vs-sidebar v-hammer:swipe.left="onSwipeLeft" ref="mainSidebar" :parent="parent" :hiddenBackground="clickNotClose" :reduce="reduce" default-index="-1" class="sidebarx main-menu-sidebar items-no-padding" v-model="isSidebarActive" :click-not-close="clickNotClose" :reduce-not-rebound="reduceNotRebound">
             <div @mouseenter="sidebarMouseEntered" @mouseleave="sidebarMouseLeave">
                 <div class="header-sidebar flex items-end justify-between" slot="header">
+                    <router-link to="/">
                     <div class="logo flex items-center">
                         <img :src="logo" alt="logo" class="w-10 mr-4" v-if="logo">
                         <span class="logo-text" v-show="isMouseEnter || !reduce" v-if="title">{{ title }}</span>
                     </div>
+                    </router-link>
                     <div>
                         <template v-if="showCloseButton">
                             <feather-icon icon="XIcon" class="m-0 cursor-pointer" @click="$store.commit('TOGGLE_IS_SIDEBAR_ACTIVE', false)"></feather-icon>

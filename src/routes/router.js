@@ -18,12 +18,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // AUTHENTICATED DASHBOARD ROUTES
-import miniApps from './auth/mini-app.routes'
-import companionRoutes from './auth/companion.routes'
-import apppointmentRoutes from './auth/appointment.routes'
 import customerRoutes from './auth/customer.routes'
-import accountingRoutes from './auth/accounting.routes'
-import settingsRoutes from './auth/settings.routes'
 
 // UNAUTHENTICATED FULL PAGE ROUTES
 import errorRoutes from './guest/error.routes'
@@ -51,17 +46,9 @@ const router = new Router({
         // Theme Routes
         // =============================================================================
                 {
-                    path: '',
+                    path: '/',
                     name: 'dashboard',
                     component: () => import('@/views/pages/full-page/dashboard/Dashboard.vue'),
-                    meta: {
-                        rule: 'editor'
-                    }
-                },
-                {
-                    path: '/schedule',
-                    name: 'schedule',
-                    component: () => import('@/views/pages/dash-page/schedule/ScheduleCalendar.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -70,8 +57,7 @@ const router = new Router({
         // =============================================================================
         // Dashboard Routes (Authenticated)
         // =============================================================================
-               ...miniApps, ...companionRoutes, ...apppointmentRoutes, ...customerRoutes, ...accountingRoutes, 
-               ...settingsRoutes
+                ...customerRoutes,
             ],
         },
     // =============================================================================

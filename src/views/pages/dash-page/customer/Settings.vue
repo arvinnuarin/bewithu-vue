@@ -8,7 +8,7 @@
 <template>
     <div class="vx-row w-full">
         <div class="vx-col w-full lg:w-1/2 mb-base">
-            <vx-card title="Security" title-color="primary">
+            <vx-card title="Settings" title-color="primary">
                 <div class="vx-row">
                     <div class="vx-col w-2/3 mb-6">
                         <div class="vs-component vs-con-input-label vs-input w-full vs-input-primary"><label for="" class="vs-input--label">Language</label>

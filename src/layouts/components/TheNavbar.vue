@@ -9,18 +9,18 @@
 <div class="relative">
   <div class="vx-navbar-wrapper">
     <vs-navbar class="vx-navbar navbar-custom" :color="navbarColor" :class="classObj">
-
+        
         <!-- SM - OPEN SIDEBAR BUTTON -->
         <feather-icon class="sm:inline-flex xl:hidden cursor-pointer mr-1" icon="MenuIcon" @click.stop="showSidebar"></feather-icon>
         <!-- Search -->
         <vs-input icon-pack="feather" icon="icon-search" icon-after class="inputx w-1/4" placeholder="Try 'Baccarat' " v-model="searchGame" />
         <!-- NOTIFICATIONS -->
-        <the-notif-bar class="ml-5"></the-notif-bar>
+        <the-notif-bar class="ml-5" v-if="user"></the-notif-bar>
       
       <vs-spacer></vs-spacer>
 
         <!-- USER META -->
-        <div class="the-navbar__user-meta flex items-center">
+        <div class="the-navbar__user-meta flex items-center" v-if="user">
             <div class="text-right leading-tight hidden sm:block">
             <p class="font-semibold">Arvin Nuarin</p>
             <small>μ₿ 0.00</small>
@@ -91,14 +91,11 @@
 
              </vs-dropdown>
         </div>
-      
-        <div v-if="false">
+        <!-- NOT LOGIN -->
+        <div v-else>
             <vs-button class="rounded-full" color="warning" type="gradient" @click="onRegister">Register</vs-button>
             <vs-button class="pr-3" color="primary" type="flat" @click="onLogin">Login</vs-button>
         </div>
-
-      
-
     </vs-navbar>
   </div>
 </div>
@@ -120,7 +117,7 @@ export default {
       TheNotifBar
     },
     created() {
-     // this.$store.dispatch('auth/setAuthenticatedUser');
+        this.$store.dispatch('auth/setAuthenticatedUser');
     },
     props: {
         navbarColor: {
