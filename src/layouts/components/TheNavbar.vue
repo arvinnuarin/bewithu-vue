@@ -10,96 +10,94 @@
   <div class="vx-navbar-wrapper">
     <vs-navbar class="vx-navbar navbar-custom" :color="navbarColor" :class="classObj">
 
-      <!-- SM - OPEN SIDEBAR BUTTON -->
-      <feather-icon class="sm:inline-flex xl:hidden cursor-pointer mr-1" icon="MenuIcon" @click.stop="showSidebar"></feather-icon>
-
-      <template v-if="breakpoint != 'md'">
-        <!-- STARRED PAGES - FIRST 10 -->
-        <ul class="vx-navbar__starred-pages">
-          <draggable v-model="starredPagesLimited" :group="{name: 'pinList'}" class="flex cursor-move">
-            <li class="starred-page" v-for="page in starredPagesLimited" :key="page.url">
-              <vx-tooltip :text="page.label" position="bottom" delay=".3s">
-                <feather-icon svgClasses="h-6 w-6" class="p-2 cursor-pointer" :icon="page.labelIcon" @click="$router.push(page.url)"></feather-icon>
-              </vx-tooltip>
-            </li>
-          </draggable>
-        </ul>
-
-        <!-- STARRED PAGES MORE -->
-        <div class="vx-navbar__starred-pages--more-dropdown" v-if="starredPagesMore.length">
-          <vs-dropdown vs-custom-content vs-trigger-click>
-            <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" class="cursor-pointer p-2"></feather-icon>
-            <vs-dropdown-menu>
-              <ul class="vx-navbar__starred-pages-more--list">
-                <draggable v-model="starredPagesMore" :group="{name: 'pinList'}" class="cursor-move">
-                  <li class="starred-page--more flex items-center cursor-pointer" v-for="page in starredPagesMore" :key="page.url" @click="$router.push(page.url)">
-                    <feather-icon svgClasses="h-5 w-5" class="ml-2 mr-1" :icon="page.labelIcon"></feather-icon>
-                    <span class="px-2 pt-2 pb-1">{{ page.label }}</span>
-                  </li>
-                </draggable>
-              </ul>
-            </vs-dropdown-menu>
-          </vs-dropdown>
-        </div>
-
-        <div class="bookmark-container">
-          <feather-icon icon="StarIcon" :svgClasses="['stoke-current text-warning', {'text-white': navbarColor != '#fff'}]" class="cursor-pointer p-2" @click.stop="showBookmarkPagesDropdown = !showBookmarkPagesDropdown" />
-                    <div v-click-outside="outside" class="absolute bookmark-list w-1/3 xl:w-1/4 mt-4" v-if="showBookmarkPagesDropdown">
-          <vx-auto-suggest :autoFocus="true" :data="navbarSearchAndPinList" @selected="selected" @actionClicked="actionClicked" inputClassses="w-full" show-action show-pinned background-overlay></vx-auto-suggest>
-          </div>
-        </div>
-      </template>
-
-
+        <!-- SM - OPEN SIDEBAR BUTTON -->
+        <feather-icon class="sm:inline-flex xl:hidden cursor-pointer mr-1" icon="MenuIcon" @click.stop="showSidebar"></feather-icon>
+        <!-- Search -->
+        <vs-input icon-pack="feather" icon="icon-search" icon-after class="inputx w-1/4" placeholder="Try 'Baccarat' " v-model="searchGame" />
+        <!-- NOTIFICATIONS -->
+        <the-notif-bar class="ml-5"></the-notif-bar>
+      
       <vs-spacer></vs-spacer>
 
-      <!-- NOTIFICATIONS -->
-      <the-notif-bar></the-notif-bar>
+        <!-- USER META -->
+        <div class="the-navbar__user-meta flex items-center">
+            <div class="text-right leading-tight hidden sm:block">
+            <p class="font-semibold">Arvin Nuarin</p>
+            <small>μ₿ 0.00</small>
+            </div>
+            <!-- Deposit -->
+            <div class="ml-3">
+                <vs-button class="rounded-full" color="warning" type="filled" @click="onDeposit">Deposit</vs-button>
+            </div>
 
-      <!-- USER META -->
-      <div class="the-navbar__user-meta flex items-center">
-        <div class="text-right leading-tight hidden sm:block">
-          <p class="font-semibold">{{ user.displayName }}</p>
-          <small>Administrator</small>
-        </div>
-        <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
-          <div class="con-img ml-3">
-            <img key="localImg"
-              src="https://static.giantbomb.com/uploads/original/13/133617/2616399-doraemon_pic.jpg"
-              alt="user-img"
-              width="40"
-              height="40"
-              class="rounded-full shadow-md cursor-pointer block" />
-          </div>
-          <vs-dropdown-menu class="vx-navbar-dropdown">
-            <ul style="min-width: 9rem">
-              <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="$router.push('/settings/user/profile')">
+             <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
+                <div class="con-img ml-3">
+                    <img key="localImg"
+                    src="https://heathmont.imgix.net/bitcasino/images/loyalty-beginner-avatar.png?auto=compress,format"
+                    alt="user-img"
+                    width="40"
+                    height="40"
+                    class="rounded-full shadow-md cursor-pointer block" />
+                </div>
+                <!--Dropdown -->
+                <vs-dropdown-menu class="vx-navbar-dropdown">
+                    <ul style="min-width: 9rem">
+                        <li
+                            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                            @click="$router.push('/customer/loyalty')">
 
-                <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
-                <span class="ml-2">Profile</span>
-              </li>
-              <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="$router.push('/apps/todo')">
+                            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+                            <span class="ml-2">Loyalty</span>
+                        </li>
+                         <li
+                            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                            @click="$router.push('/customer/bonuses')">
 
-                <feather-icon icon="CheckSquareIcon" svgClasses="w-4 h-4" />
-                <span class="ml-2">Tasks</span>
-              </li>
+                            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+                            <span class="ml-2">Bonuses</span>
+                        </li>
+                         <li
+                            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                            @click="$router.push('/customer/account')">
 
-              <vs-divider class="m-1"></vs-divider>
+                            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+                            <span class="ml-2">Account</span>
+                        </li>
+                        <li
+                            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                            @click="$router.push('/customer/security')">
 
-              <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="logout">
-                <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4"/>
-                <span class="ml-2">Logout</span>
-              </li>
-            </ul>
+                            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+                            <span class="ml-2">Security</span>
+                        </li>
+                         <li
+                            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                            @click="$router.push('/customer/settings')">
+
+                            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+                            <span class="ml-2">Settings</span>
+                        </li>
+
+                        <vs-divider class="m-1"></vs-divider>
+
+                        <li
+                            class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                            @click="logout">
+                            <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4"/>
+                            <span class="ml-2">Logout</span>
+                        </li>
+                    </ul>
           </vs-dropdown-menu>
-        </vs-dropdown>
-      </div>
+
+             </vs-dropdown>
+        </div>
+      
+        <div v-if="false">
+            <vs-button class="rounded-full" color="warning" type="gradient" @click="onRegister">Register</vs-button>
+            <vs-button class="pr-3" color="primary" type="flat" @click="onLogin">Login</vs-button>
+        </div>
+
+      
 
     </vs-navbar>
   </div>
@@ -122,7 +120,7 @@ export default {
       TheNotifBar
     },
     created() {
-      this.$store.dispatch('auth/setAuthenticatedUser');
+     // this.$store.dispatch('auth/setAuthenticatedUser');
     },
     props: {
         navbarColor: {
@@ -141,6 +139,7 @@ export default {
             },
             autoFocusSearch: false,
             showBookmarkPagesDropdown: false,
+            searchGame: null
         }
     },
     watch: {
@@ -200,6 +199,12 @@ export default {
         },
     },
     methods: {
+        onLogin() {
+         this.$router.push('/auth/login')
+        },
+        onRegister() {
+            this.$router.push('/auth/signup')
+        },
         updateLocale(locale) {
             this.$i18n.locale = locale;
         },
@@ -226,7 +231,6 @@ export default {
         outside: function() {
             this.showBookmarkPagesDropdown = false
         },
-
         // Method for creating dummy notification time
         randomDate({hr, min, sec}) {
           let date = new Date()
@@ -236,6 +240,9 @@ export default {
           if(sec) date.setSeconds(date.getSeconds() - sec)
 
           return date
+        },
+        onDeposit() {
+            this.$router.push('/customer/funds')
         }
     },
     directives: {

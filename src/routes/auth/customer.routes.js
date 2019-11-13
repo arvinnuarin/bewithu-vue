@@ -18,35 +18,34 @@ import _ from 'lodash'
 
 const customerRoutes = [ 
     {
-        path: '/customers/:status',
-        name: 'customer-status',
-        component: () => import('@/views/pages/dash-page/customers/ManageCustomers.vue'),
+        path: '/customer/:page',
+        name: 'customer-main',
+        component: () => import('@/views/pages/dash-page/customer/Main.vue'),
         meta: {
             breadcrumb: [
                 { title: 'Dashboard', url: '/dashboard' },
-                { title: 'Customers', active: true }],
-            pageTitle: 'Customers',
+                { title: 'Customer Account', active: true }],
+            pageTitle: 'Customer Account',
             rule: 'editor'
         },
         beforeEnter: (to, from, next) => {
             function apptStat (param) {
-               const status = [{ type: 'active', name: 'Active' }, 
-               { type: 'inactive', name: 'Inactive' }]
-      
-               return _.find(status, {type: param});
+               const pages = [{ type: 'funds', name: 'Funds' }, { type: 'loyalty', name: 'Loyalty' },
+               { type: 'bonuses', name: 'Bonuses' }, { type: 'account', name: 'Account' },
+               { type: 'security', name: 'Security' }, { type: 'settings', name: 'Settings' },
+               { type: 'notifications', name: 'Notifications' },
+            ]
+               return _.find(pages, {type: param});
             }
 
-            const data = apptStat(to.params.status);
+            const data = apptStat(to.params.page);
             const isValid = data ? true : false;
             
             if (!isValid) { next({ name: 'pageError404' }); }
-
-            to.meta.pageTitle = `${data.name} Customers`;
-            to.meta.breadcrumb[1] = { title: `${data.name} Customers`, active: true };
-
+            
             next();
         }
-    },
+    }
 ];
 
 export default customerRoutes;

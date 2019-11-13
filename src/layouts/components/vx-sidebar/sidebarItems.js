@@ -18,113 +18,87 @@
 
 export default [
   {
-    url: '/dashboard',
-    name: "Dashboard",
-    slug: "dashboard",
-    icon: "HomeIcon",
-  },
-  {
-    header: "Companion",
-  },
-  {
-    url: null,
-    name: "Companions",
-    slug: "pos",
-    icon: "GithubIcon",
-    submenu: [
-      {
-        url: '/companions/add',
-        name: "New Companion",
-        slug: "companion-new",
-      },
-      {
-        url: '/companions/manage',
-        name: "Manage Companions",
-        slug: "companion-manage",
-      },
-      {
-        url: '/companions/rest-day',
-        name: "Companion Rest Day",
-        slug: "companion-rest-day",
-      },
-    ]
+    header: "게임",
   },
   {
     url: '/companions/service-rates',
-    name: "Services",
+    name: "슬롯",
     slug: "rates",
-    icon: "BriefcaseIcon"
   },
   {
-    header: "Appointments",
+    url: '/companions/service-rates',
+    name: "잭팟 슬롯",
+    slug: "rates",
   },
   {
-    url: '/appointments/pending',
-    name: "Pending",
+    url: '/companions/service-rates',
+    name: "버커라",
+    slug: "rates",
+  },
+  {
+    url: '/companions/service-rates',
+    name: "불략잭",
+    slug: "rates",
+  },
+  {
+    url: '/companions/service-rates',
+    name: "롤렛",
+    slug: "rates",
+  },
+  {
+    url: '/companions/service-rates',
+    name: "태아불 게임",
+    slug: "rates",
+  },
+  {
+    url: '/companions/service-rates',
+    name: "모든 게임",
+    slug: "rates",
+  },
+  {
+    url: '/companions/service-rates',
+    name: "테마",
+    slug: "rates",
+  },
+  {
+    url: null,
+    name: "",
+    slug: "rates",
+  },
+  {
+    url: null,
+    name: "",
+    slug: "rates",
+  },
+
+  {
+    url: null,
+    name: "라이브 카시노",
     slug: "appointment-pending",
-    icon: "AlertCircleIcon",
-  },
-  {
-    url: '/appointments/scheduled',
-    name: "Scheduled",
-    slug: "appointment-scheduled",
-    icon: "ClipboardIcon",
   },
   {
     url: '/appointments/completed',
-    name: "Completed",
+    name: "BOMBAY CLUB",
     slug: "appointment-completed",
-    icon: "CheckSquareIcon",
   },
   {
     url: '/appointments/cancelled',
-    name: "Cancelled",
+    name: "공급자",
     slug: "appointment-cancelled",
-    icon: "CloudOffIcon",
   },
   {
-    header: "Customers",
+    url: '/appointments/cancelled',
+    name: "슻포츠복",
+    slug: "appointment-cancelled",
   },
   {
-    url: '/customers/active',
-    name: "Active Customers",
-    slug: "customer-active",
-    icon: "UserCheckIcon",
+    url: '/appointments/cancelled',
+    name: "프로모션",
+    slug: "appointment-cancelled",
   },
   {
-    url: '/customers/inactive',
-    name: "Inactive Customers",
-    slug: "customer-inactive",
-    icon: "UserXIcon",
-  },
-  {
-    header: "Accounting",
-  },
-  {
-    url: '/accounting/transactions/appointment',
-    name: "Transactions",
-    slug: "transactions",
-    icon: "DollarSignIcon",
-  },
-  {
-    url: '/accounting/expenses',
-    name: "Expenses",
-    icon: "TrendingUpIcon",
-    slug: "expenses",
-  },
-  {
-    header: "Settings",
-  },
-  {
-    url: '/settings/user/profile',
-    name: "User Profile",
-    slug: "user-profile",
-    icon: "UserIcon",
-  },
-  {
-    url: '/settings/manage-users',
-    name: "Manage Users",
-    slug: "manage-users",
-    icon: "UsersIcon",
-  },
+    url: '/appointments/cancelled',
+    name: "고객선터",
+    slug: "appointment-cancelled",
+  }
 ]

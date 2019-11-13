@@ -45,17 +45,13 @@ const router = new Router({
     // =============================================================================
             path: '',
             component: () => import('@/layouts/main/Main.vue'),
-            meta: { requiresAuth: true},
+            meta: { requiresAuth: false},
             children: [
         // =============================================================================
         // Theme Routes
         // =============================================================================
                 {
-                    path: '/',
-                    redirect: '/dashboard'
-                },
-                {
-                    path: '/dashboard',
+                    path: '',
                     name: 'dashboard',
                     component: () => import('@/views/pages/full-page/dashboard/Dashboard.vue'),
                     meta: {

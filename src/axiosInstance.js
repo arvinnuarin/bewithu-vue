@@ -16,7 +16,7 @@ try {
 }
 // ',
 const ax = axios.create({
-    baseURL: 'https://bewithu-appt.herokuapp.com/api/admin/',
+    baseURL: 'https://luxecasino-api.herokuapp.com/api/customer/',
     timeout: 10000,
     headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 
     'X-Requested-With': 'XMLHttpRequest', 'Authorization': token}

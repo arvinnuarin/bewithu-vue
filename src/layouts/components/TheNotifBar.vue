@@ -14,7 +14,7 @@
 
         <div class="notification-top text-center p-5 bg-primary text-white">
         <h3 class="text-white">{{ notifications.length }} New</h3>
-        <p class="opacity-75">Appointment Notifications</p>
+        <p class="opacity-75">Your Notifications</p>
         </div>
 
         <VuePerfectScrollbar ref="mainSidebarPs" class="scroll-area--nofications-dropdown p-0 mb-10" :settings="settings">
@@ -47,8 +47,8 @@
                     border-r-0
                     border-solid
                     d-theme-border-grey-light
-                    cursor-pointer">
-                    <span>Appointment Notifications</span>
+                    cursor-pointer" @click="viewAllNotif">
+                    <span>View All Notifications</span>
                 </div>
     </vs-dropdown-menu>
     </vs-dropdown>
@@ -133,6 +133,9 @@ export default {
         },
         removeNotification(id) {
             console.log(id)
+        },
+        viewAllNotif() {
+            this.$router.push('/customer/notifications')
         }
     },
     computed: {

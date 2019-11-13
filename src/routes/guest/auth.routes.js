@@ -35,6 +35,15 @@ const authRoutes = [
         }
     },
     {
+        path: '/auth/signup',
+        name: 'authSignup',
+        component: () => import('@/views/pages/full-page/auth/Register.vue'),
+        meta: {
+            rule: 'public',
+            authRoute: 'true'
+        }
+    },
+    {
         path: '/auth/forgot-password',
         name: 'authForgotPassword',
         component: () => import('@/views/pages/full-page/auth/ForgotPassword.vue'),

@@ -5,19 +5,28 @@
 ========================================================================================== -->
 <template>
     <div class="h-screen flex w-full bg-img" id="page-login">
-        <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/5 mx-auto self-center">
+        <div class="vx-col sm:w-full md:w-1/4 lg:w-1/4">
             <vx-card>
-                <div slot="no-body" class="full-page-bg-color">
-                    <div class="vx-row">
-                        <div class="vx-col hidden sm:hidden md:hidden lg:block lg:w-1/2 mx-auto self-center">
-                            <img src="@/assets/images/pages/login.png" alt="login" class="mx-auto">
-                        </div>
-                        <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center  d-theme-dark-bg">
+                <div slot="no-body" >
+                    <div class="vx-row h-screen">
+                        <div class="vx-col sm:w-full md:w-full lg:w-full d-theme-dark-bg">
+                            <!-- Logo -->
+                            <div class="pt-3">
+
+                            </div>
+                            <!-- Body -->
                             <div class="p-8">
                                 <div class="vx-card__title mb-8">
-                                <h4 class="mb-4">Welcome to BeWithU Admin</h4>
+                                    <h4 class="mb-4">LuxeCasino Login</h4>
                                     <p>Please login your account to start a new session.</p>
                                 </div>
+                                <!-- Google -->
+                                <div class="">
+                                    <vs-button color="primary" type="border" icon-pack="feather" icon="icon-home" class="float-right">Google</vs-button>
+                                    <vs-button color="primary" type="border" icon-pack="feather" icon="icon-facebook">Facebook</vs-button>
+                                </div>
+                                <h3 class="text-center"> OR </h3>
+                                <vs-divider />
                                 <vs-input
                                     v-validate="'required|email|min:3'"
                                     data-vv-validate-on="blur"
@@ -60,8 +69,8 @@
 export default {
     data() {
         return {
-            email: 'micaellaoronce@gmail.com',
-            password: 'password',
+            email: '',
+            password: '',
             checkbox_remember_me: false
         }
     },
@@ -75,7 +84,8 @@ export default {
             const payload = {
                 remember: this.checkbox_remember_me,
                 email: this.email,
-                password: this.password
+                password: this.password,
+                provider: 'customers'
             }
 
             this.$store.dispatch('auth/login', payload);

@@ -13,18 +13,18 @@
 /////////////////////////////////////////////////////////
 .vs-navbar.vx-navbar {
     padding: .8rem 1rem;
-    width: calc(100% - 260px - 4.4rem);
+    width: calc(100% - 330px - 13rem);
     position: fixed;
     border-radius: .5rem;
     transition: all .5s;
     z-index: 10000;
 
     &.navbar-reduced {
-        width: calc(100% - #{$reduced-sidebar-width} - 4.4rem);
+        width: calc(100% - #{$reduced-sidebar-width} - 10rem);
     }
 
     &.navbar-full {
-        width: calc(100% - 4.4rem);
+        width: calc(100% - 10rem);
     }
 }
 
@@ -34,16 +34,17 @@
 // CONTENT AREA
 /////////////////////////////////////////////////////////
 #content-area {
-    margin-left: 260px;
+    margin-left: 350px;
     height: 100%;
     transition: margin-left 0.5s;
 
     .content-wrapper{
         min-height: calc(100vh - 3.5rem);
+        margin-right: 7rem;
     }
 
     &.content-area-reduced {
-        margin-left: $reduced-sidebar-width;
+        margin-left: 0px;
     }
 
     &.content-area-full {
