@@ -31,9 +31,9 @@ export default [
     slug: "jackpot-slots",
   },
   {
-    url: '/games/bacarrat',
-    name: "Bacarrat",
-    slug: "bacarrat",
+    url: '/games/baccarat',
+    name: "Baccarrat",
+    slug: "baccarat",
   },
   {
     url: '/games/blackjack',
@@ -56,7 +56,7 @@ export default [
     slug: "all-games",
   },
   {
-    url: '/games/themes',
+    url: 'themes',
     name: "Themes",
     slug: "themes",
   },
@@ -72,12 +72,29 @@ export default [
   },
 
   {
-    url: '/games/live-casino',
+    url: null,
     name: "LIVE CASINO",
     slug: "live-casino",
+    submenu: [
+      {
+        url: '/games/live-baccarat',
+        name: 'Live Baccarat',
+        slug: 'live-baccarat'
+      },
+      {
+        url: '/games/live-blackjack',
+        name: 'Live Blackjack',
+        slug: 'live-blackjack'
+      },
+      {
+        url: '/games/live-roulette',
+        name: 'Live Roulette',
+        slug: 'live-roulette'
+      }
+    ]
   },
   {
-    url: '/games/bombay-club',
+    url: '/bombay-club',
     name: "BOMBAY CLUB",
     slug: "bombay-club",
   },

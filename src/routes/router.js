@@ -23,6 +23,7 @@ import customerRoutes from './auth/customer.routes'
 // UNAUTHENTICATED FULL PAGE ROUTES
 import errorRoutes from './guest/error.routes'
 import authRoutes from './guest/auth.routes'
+import gameRoutes from './guest/game.routes'
 
 Vue.use(Router)
 
@@ -55,9 +56,11 @@ const router = new Router({
                 },
 
         // =============================================================================
-        // Dashboard Routes (Authenticated)
+        // Dashboard Routes
         // =============================================================================
                 ...customerRoutes,
+                ...gameRoutes
+               
             ],
         },
     // =============================================================================
@@ -71,7 +74,7 @@ const router = new Router({
         // PAGES
         // =============================================================================
                ...errorRoutes,
-               ...authRoutes
+               ...authRoutes,
             ]
         },
         // Redirect to 404 page, if no match found

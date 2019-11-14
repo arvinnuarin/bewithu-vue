@@ -301,8 +301,8 @@
 //////////////////////////////////////////////////////////////////////////
 
 .sidebar-spacer {
-    width: calc(100% - 350px);
-    margin-left: 350px;
+    width: calc(100% - 260px);
+    margin-left: 260px;
 }
 
 .background-absolute {
@@ -312,8 +312,8 @@
 }
 
 .sidebar-spacer-with-margin {
-    width: calc(100% - 350px - 2.2rem);
-    margin-left: calc(350px + 2.2rem);
+    width: calc(100% - 260px - 2.2rem);
+    margin-left: calc(260px + 2.2rem);
 }
 
 .sidebar-spacer--wide {
@@ -324,8 +324,8 @@
 // Create full width sidebar
 .full-vs-sidebar {
     .vs-sidebar {
-        max-width: calc(100% - 350px);
-        margin-left: 350px;
+        max-width: calc(100% - 260px);
+        margin-left: 260px;
     }
 }
 

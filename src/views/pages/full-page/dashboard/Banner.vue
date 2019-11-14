@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="vx-col w-full md:w-1/2">
-                <img src="//heathmont.imgix.net/bitcasino/images/promotions/2019/tron-disney-mainpage-character.png?auto=compress,format&w=630">
+                <img class="resize visible sm:invisible md:visible lg:invisible xl:visible" src="//heathmont.imgix.net/bitcasino/images/promotions/2019/tron-disney-mainpage-character.png?auto=compress,format&w=630">
             </div>
         </div>
     </vx-card>

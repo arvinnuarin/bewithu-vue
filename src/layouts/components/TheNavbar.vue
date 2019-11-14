@@ -13,7 +13,7 @@
         <!-- SM - OPEN SIDEBAR BUTTON -->
         <feather-icon class="sm:inline-flex xl:hidden cursor-pointer mr-1" icon="MenuIcon" @click.stop="showSidebar"></feather-icon>
         <!-- Search -->
-        <vs-input icon-pack="feather" icon="icon-search" icon-after class="inputx w-1/4" placeholder="Try 'Baccarat' " v-model="searchGame" />
+        <vs-input icon-pack="feather" icon="icon-search" icon-after class="inputx  sm:w-1/4 lg:w-1/4 md:w-1/4" placeholder="Try 'Baccarat' " v-model="searchGame" />
         <!-- NOTIFICATIONS -->
         <the-notif-bar class="ml-5" v-if="user"></the-notif-bar>
       
@@ -93,7 +93,7 @@
         </div>
         <!-- NOT LOGIN -->
         <div v-else>
-            <vs-button class="rounded-full" color="warning" type="gradient" @click="onRegister">Register</vs-button>
+            <vs-button class="rounded-full" color="#ff6229" type="filled" @click="onRegister">Register</vs-button>
             <vs-button class="pr-3" color="primary" type="flat" @click="onLogin">Login</vs-button>
         </div>
     </vs-navbar>

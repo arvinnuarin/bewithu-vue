@@ -7,8 +7,8 @@
 ========================================================================================== -->
 
 <template functional>
-    <footer class="" :class="classes">
-        <div class="vx-row">
+    <footer class="">
+        <div class="vx-row pb-4">
             <div class="vx-col w-full md:w-1/3 lg:w-1/3">
                 <p>Established in 2019, BItcasino is one of the premier, leading online Biotcoin casinos. All right reserved.</p>
             </div>
@@ -72,11 +72,12 @@
 <script>
 
 export default {
-    name: "the-footer",
-    props: {
-        classes: {
-            type: String,
-        },
-    }
+    name: "the-footer"
 }
 </script>
+
+<style scoped>
+footer {
+    background-color: #989b9f;
+}
+</style>
