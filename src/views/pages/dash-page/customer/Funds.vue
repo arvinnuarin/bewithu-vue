@@ -31,7 +31,7 @@
                     <h3 class="text-bold">$ 0.00</h3>
                 </span>
                 <span class="float-right">
-                    <vs-button class="rounded-full mr-3" color="warning" type="filled">Deposit</vs-button>
+                    <vs-button class="rounded-full mr-3" color="warning" type="filled" @click="navigateToDeposit">Deposit</vs-button>
                     <vs-button class="rounded-full" color="primary" type="filled">Withdraw</vs-button>
                 </span>
             </div>
@@ -69,6 +69,11 @@ export default {
     data() {
         return {
             btc: true
+        }
+    },
+    methods: {
+        navigateToDeposit() {
+            this.$router.push('/customer/funds/deposit')
         }
     }
 

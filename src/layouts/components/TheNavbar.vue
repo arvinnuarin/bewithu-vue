@@ -23,7 +23,7 @@
         <div class="the-navbar__user-meta flex items-center" v-if="user">
             <div class="text-right leading-tight hidden sm:block">
             <p class="font-semibold">{{ user.displayName }}</p>
-            <small>μ₿ 0.00</small>
+            <small>{{ btc_wallet }}</small>
             </div>
             <!-- Deposit -->
             <div class="ml-3">
@@ -117,7 +117,8 @@ export default {
       TheNotifBar
     },
     created() {
-        this.$store.dispatch('auth/setAuthenticatedUser');
+        this.$store.dispatch('auth/setAuthenticatedUser')
+        this.$store.dispatch('wallet/getBtcWallet')
     },
     props: {
         navbarColor: {
@@ -194,6 +195,10 @@ export default {
         user() {
           return this.$store.state.auth.user
         },
+        // BTC WALLET
+        btc_wallet() {
+            return 'mBTC ' + (this.$store.state.wallet.btc_wallet.amount / 100000).toFixed(2)
+        }
     },
     methods: {
         onLogin() {

@@ -46,6 +46,20 @@ const customerRoutes = [
             
             next();
         }
+    },
+    {
+        path: '/customer/funds/deposit',
+        name: 'customer-deposit',
+        component: () => import('@/views/pages/dash-page/deposit/Deposit.vue'),
+        meta: {
+            breadcrumb: [
+                { title: 'Dashboard', url: '/dashboard' },
+                { title: 'Funds', url: '/customer/funds' },
+                { title: 'Deposit', url: '/customer/funds/deposit', active: true }],
+            pageTitle: 'Fund Account',
+            rule: 'editor',
+            requiresAuth: true
+        }
     }
 ];
 

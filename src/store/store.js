@@ -16,10 +16,8 @@ import actions from "./actions"
 Vue.use(Vuex)
 
 import moduleAuth from './auth/moduleAuth'
-import moduleTodo from './todo/moduleTodo'
-import moduleCalendar from './calendar/moduleCalendar'
-import moduleReport from './report/moduleReport'
 import moduleNotif from './notif/moduleNotif'
+import moduleWallet from './wallet/moduleWallet'
 
 export default new Vuex.Store({
     getters,
@@ -27,11 +25,9 @@ export default new Vuex.Store({
     state,
     actions,
     modules: {
-      auth: moduleAuth,  
-      todo: moduleTodo,
-      calendar: moduleCalendar,
-      report: moduleReport,
-      notif: moduleNotif
+      auth: moduleAuth,
+      notif: moduleNotif,
+      wallet: moduleWallet
     },
     strict: process.env.NODE_ENV !== 'production'
 })

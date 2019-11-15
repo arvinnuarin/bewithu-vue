@@ -6,7 +6,7 @@
 ========================================================================================== -->
 <template>
     <div class="vx-row pt-6">
-        <game-card :key="i" v-for="(game, i) in filtered_games" :type="$route.params.game" :title="game.name" :image="game.img"/>
+        <game-card :key="i" v-for="(game, i) in filtered_games" :type="$route.params.game" :title="game.name" :image="game.image"/>
     </div>
 </template>
 
@@ -14,6 +14,8 @@
 
 import GameCard from './GameCard'
 import _ from 'lodash'
+
+import ax from '@/axiosInstance'
 
 export default {
     name: 'GameList',
@@ -43,72 +45,11 @@ export default {
         next();
     },
     mounted() {
-        console.log(this.$route.params.game)
+        this.initGames()
     },
     data() {
         return {
-            games: [
-                {
-                    type: 'blackjack',
-                    name: 'Boombay Club Blackjack',
-                    img: '//heathmont.imgix.net/casino-evolution/evolution-baccarat-lobby-thumb.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'roulettes',
-                    name: 'Boombay Club Speed Roulette',
-                    img: '//heathmont.imgix.net/casino-evolution/bombay-speed-roulette-thumbnail.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'roulettes',
-                    name: 'MONOPOLY Live',
-                    img: '//heathmont.imgix.net/casino-evolution/monopoly-live.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'baccarat',
-                    name: 'Boombay Club Squeeze Baccarat',
-                    img: '//heathmont.imgix.net/casino-evolution/squeeze-baccarat-thumbnail.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'blackjack',
-                    name: 'Evolution Blackjack Lobby',
-                    img: '//heathmont.imgix.net/casino-evolution/evolution-blackjack-lobby-thumb.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'baccarat',
-                    name: 'Bombay Club Salon Prive Baccarat',
-                    img: '//heathmont.imgix.net/casino-evolution/bombay-saloon-private-baccarat-thumbnail.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'roulettes',
-                    name: 'Evolution Roulette Lobby',
-                    img: '//heathmont.imgix.net/casino-evolution/evolution-roulette-lobby-thumb.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'baccarat',
-                    name: 'Evolution Live Speed Baccarat B',
-                    img: '//heathmont.imgix.net/casino-evolution/speed-baccarat-b-thumb.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'baccarat',
-                    name: 'Evolution Live Speed Baccarat A',
-                    img: '//heathmont.imgix.net/casino-evolution/speed-baccarat-a-thumb.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'baccarat',
-                    name: 'Evolution Live Casino Holdem',
-                    img: '//heathmont.imgix.net/casino-evolution/casino-holdem-thumb.jpg?auto=compress,format&w=194'
-                },
-                {
-                    type: 'live-blackjack',
-                    name: 'Evolution Live Blackjack Party',
-                    img: '//heathmont.imgix.net/casino-evolution/blackjack-party-thumb.jpg?auto=compress,format&w=194'
-                },
-                 {
-                    type: 'live-blackjack',
-                    name: 'Blackjack Diamond VIP',
-                    img: '//heathmont.imgix.net/casino-evolution/blackjack-diamond-vip-thumb.jpg?auto=compress,format&w=194'
-                },
-            ]
+            games: []
         }
     },
     computed: {
@@ -117,6 +58,11 @@ export default {
                return game.type === window.$v.$route.params.game
            })
        }
+    },
+    methods: {
+        async initGames() {
+            await ax.get('/games').then(res => this.games = res.data).catch(() => this.games = [])
+        },
     }
 }
 </script>
