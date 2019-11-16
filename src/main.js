@@ -91,13 +91,18 @@ Vue.use(VueMoment);
 // Vue Currency Filter
 import VueCurrencyFilter from 'vue-currency-filter'
 Vue.use(VueCurrencyFilter, {
-  symbol : '₱',
+  symbol : '$',
   thousandsSeparator: ', ',
   fractionCount: 2,
   fractionSeparator: '.',
   symbolPosition: 'front',
   symbolSpacing: true
 })
+
+// mBTC Vue Filter
+Vue.filter('mBTC', function (value) {
+  return `mBTC ${ parseFloat(value).toFixed(2) }`;
+});
 
 // Laravel Echo
 require('pusher-js');

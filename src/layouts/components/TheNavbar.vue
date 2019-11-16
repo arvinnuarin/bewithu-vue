@@ -23,7 +23,7 @@
         <div class="the-navbar__user-meta flex items-center" v-if="user">
             <div class="text-right leading-tight hidden sm:block">
             <p class="font-semibold">{{ user.displayName }}</p>
-            <small>{{ btc_wallet }}</small>
+            <small>{{ btc_wallet | mBTC }}</small>
             </div>
             <!-- Deposit -->
             <div class="ml-3">
@@ -197,7 +197,7 @@ export default {
         },
         // BTC WALLET
         btc_wallet() {
-            return 'mBTC ' + (this.$store.state.wallet.btc_wallet.amount / 100000).toFixed(2)
+            return this.$store.state.wallet.btc_wallet.amount
         }
     },
     methods: {

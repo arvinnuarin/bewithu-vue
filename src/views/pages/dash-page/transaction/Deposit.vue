@@ -10,7 +10,7 @@
         <div class="vx-col w-full lg:w-1/2 xl:w-1/2 md:w-1/2">
              <vx-card title="Deposit Bitcoin" title-color="primary">
                 <div class="p-4">
-                    <h2>{{ amount }}</h2>
+                    <h2>{{ amount | mBTC }}</h2>
                 </div>
                 <div class="p-4">
                     <div class="vx-row">
@@ -43,11 +43,15 @@
                      <template slot-scope="{data}">
                         <vs-tr :key="i" v-for="(dep, i) in data">
                             <vs-td :data="dep.created_at">{{ dep.created_at }}</vs-td>
-                            <vs-td :data="dep.created_at" class="font-bold">{{ convertmBTC(dep.amount) }}</vs-td>
+                            <vs-td :data="dep.created_at" class="font-bold">{{ dep.amount | mBTC }}</vs-td>
                             <vs-td :data="dep.status" class="font-bold">{{ dep.status }}</vs-td>
                         </vs-tr>
                      </template>
                  </vs-table>
+                  <!-- See All Transactions -->
+                <div class="mt-2">
+                    <vs-button color="primary" type="filled" @click="navigateToAllTransactions" class="rounded-full mt-4">See All Transactions</vs-button>
+                </div>
              </vx-card>
         </div>
     </div>
@@ -61,16 +65,15 @@ export default {
     components: {
         VueQrcode
     },
+    mounted() {
+        this.$store.dispatch('wallet/getDeposits')
+    },
     computed: {
         deposits() {
-            return [{
-                created_at: '2019-11-11 18:00:00',
-                amount: '123456789',
-                status: 'SUCCESSFUL'
-            }]
+            return this.$store.state.wallet.deposits
         },
         amount() {
-            return 'mBTC ' + (this.$store.state.wallet.btc_wallet.amount / 100000).toFixed(2)
+            return this.$store.state.wallet.btc_wallet.amount
         },
         btc_wallet() {
             return this.$store.state.wallet.btc_wallet.btc_address
@@ -79,7 +82,10 @@ export default {
     methods: {
         convertmBTC(satoshi) {
             return 'mBTC ' + (satoshi / 100000).toFixed(2)
-        }, 
+        },
+        navigateToAllTransactions() {
+            return this.$router.push('/customer/funds/transactions')
+        },
         copyBTC() {
             
         }

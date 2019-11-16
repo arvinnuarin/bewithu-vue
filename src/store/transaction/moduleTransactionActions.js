@@ -1,17 +1,12 @@
 /*=========================================================================================
-  File Name: moduleWalletState.js
-  Description: Wallet Module State
+  File Name: moduleTransactionActions.js
+  Description: Transaction Module Actions
   ----------------------------------------------------------------------------------------
   Author: John Arvin Nuarin
 ==========================================================================================*/
 
+// import ax from '@/axiosInstance'
+
 export default {
-   btc_wallet: {
-    customer_id: null,
-    btc_address: null,
-    amount: 0,
-   },
-   transactions: [],
-   deposits: [],
-   withdrawals: []
+
 }

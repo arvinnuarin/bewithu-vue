@@ -50,13 +50,41 @@ const customerRoutes = [
     {
         path: '/customer/funds/deposit',
         name: 'customer-deposit',
-        component: () => import('@/views/pages/dash-page/deposit/Deposit.vue'),
+        component: () => import('@/views/pages/dash-page/transaction/Deposit.vue'),
         meta: {
             breadcrumb: [
                 { title: 'Dashboard', url: '/dashboard' },
                 { title: 'Funds', url: '/customer/funds' },
-                { title: 'Deposit', url: '/customer/funds/deposit', active: true }],
+                { title: 'BTC Funds Deposit', url: '/customer/funds/deposit', active: true }],
             pageTitle: 'Fund Account',
+            rule: 'editor',
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/customer/funds/withdraw',
+        name: 'customer-withdraw',
+        component: () => import('@/views/pages/dash-page/transaction/Withdrawal.vue'),
+        meta: {
+            breadcrumb: [
+                { title: 'Dashboard', url: '/dashboard' },
+                { title: 'Funds', url: '/customer/funds' },
+                { title: 'BTC Funds Withdrawal', url: '/customer/funds/withdraw', active: true }],
+            pageTitle: 'Withdraw BTC',
+            rule: 'editor',
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/customer/funds/transactions',
+        name: 'customer-transactions',
+        component: () => import('@/views/pages/dash-page/transaction/Transaction.vue'),
+        meta: {
+            breadcrumb: [
+                { title: 'Dashboard', url: '/dashboard' },
+                { title: 'Funds', url: '/customer/funds' },
+                { title: 'Transactions', url: '/customer/funds/transactions', active: true }],
+            pageTitle: 'Your Transactions',
             rule: 'editor',
             requiresAuth: true
         }
